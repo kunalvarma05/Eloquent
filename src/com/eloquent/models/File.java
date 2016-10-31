@@ -12,9 +12,11 @@ public class File {
 
     protected Date timestamp;
 
-    protected String mimeType;
-
     protected String size;
+
+    public File() {
+        super();
+    }
 
     public File(String path, String contents) {
         this.path = path;
@@ -33,10 +35,14 @@ public class File {
     /**
      * Set file path
      *
-     * @param path
+     * @param path File path
+     *
+     * @return {@link File}
      */
-    public void setPath(String path) {
+    public File setPath(String path) {
         this.path = path;
+
+        return this;
     }
 
     /**
@@ -51,10 +57,14 @@ public class File {
     /**
      * Set file contents
      *
-     * @param contents
+     * @param contents File contents
+     *
+     * @return {@link File}
      */
-    public void setContents(String contents) {
+    public File setContents(String contents) {
         this.contents = contents;
+
+        return this;
     }
 
     /**
@@ -69,10 +79,14 @@ public class File {
     /**
      * Set file name
      *
-     * @param name
+     * @param name File name File name
+     *
+     * @return {@link File}
      */
-    public void setName(String name) {
+    public File setName(String name) {
         this.name = name;
+
+        return this;
     }
 
     /**
@@ -87,28 +101,14 @@ public class File {
     /**
      * Set Timestamp
      *
-     * @param timestamp
+     * @param timestamp File timestamp
+     *
+     * @return {@link File}
      */
-    public void setTimestamp(Date timestamp) {
+    public File setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
-    }
 
-    /**
-     * Get Mime Type (File Type)
-     *
-     * @return mimeType
-     */
-    public String getMimeType() {
-        return mimeType;
-    }
-
-    /**
-     * Set Mime Type (File Type)
-     *
-     * @param mimeType
-     */
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
+        return this;
     }
 
     /**
@@ -123,9 +123,13 @@ public class File {
     /**
      * Set file size
      *
-     * @param size
+     * @param size File size
+     *
+     * @return {@link File}
      */
-    public void setSize(String size) {
+    public File setSize(String size) {
         this.size = size;
+
+        return this;
     }
 }
