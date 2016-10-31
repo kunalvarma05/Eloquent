@@ -1,0 +1,232 @@
+html, body {
+    background: #fff;
+    color: #10171d;
+    font-family: 'Glegoo', serif;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    font-size: 14px;
+    height: 100%;
+    position: relative;
+}
+
+a {
+    color: #007ee6;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0970c5;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.main {
+    background: #011627;
+    color: #babfc6;
+    min-height: 500px;
+}
+
+.header {
+    padding: 70px 20px 0 20px;
+}
+
+.flexbox {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flexbox.row {
+    flex-direction: row;
+}
+
+.flexbox.center {
+    justify-content: center;
+}
+
+.flexbox.space-between {
+    justify-content: space-between;
+}
+
+.flexbox.align-center {
+    align-items: center;
+    align-self: center;
+}
+
+.header .intro {
+    width: 60%;
+}
+
+.logo h1, .logo h1 > a {
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 42px;
+    letter-spacing: 0em;
+    color: #fff;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 0.4em;
+    text-transform: uppercase;
+}
+
+.logo h2 {
+    font-size: 24px;
+    color: #e71d36;
+    margin-top: 0;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+}
+
+.intro .description {
+    line-height: 2em;
+    color: #babfc6;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 30px;
+    border-radius: 2px;
+    background: #fff;
+    color: #e71d36;
+    transition: all 0.3s linear;
+    letter-spacing: 0.07em;
+}
+
+.btn:hover, .btn:active, .btn:focus {
+    background: #F6F7F9;
+    color: #e71d36;
+}
+
+.btn.btn-primary {
+    color: #fff;
+    background: #e71d36;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+    color: #fff;
+    background: #D2162D;
+}
+
+.actions {
+    margin-top: 20px;
+    -webkit-animation-delay: 0.5s;
+    animation-delay: 0.5s;
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+}
+
+.actions .btn:first-child {
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.links a {
+    color: #5E729B;
+    padding: 0 10px;
+}
+
+.links a:hover, .links a:focus, .links a:hover {
+    color: #4A67A1;
+}
+
+.links .divider {
+    color: #3E5466;
+}
+
+.hero {
+    margin-top: 35px;
+    -webkit-animation-delay: 0.8s;
+    animation-delay: 0.8s;
+    -webkit-animation-duration: 1.8s;
+    animation-duration: 1.8s;
+}
+
+.hero > img {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: -8px;
+}
+
+/* -- Animation -- */
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+
+@-webkit-keyframes fadeInDown {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+.fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+}
+
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
