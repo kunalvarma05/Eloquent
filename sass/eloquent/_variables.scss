@@ -1,4 +1,4 @@
-$color-base: #10171d;
+$color-base: #2B3C4B;
 $color-base-secondary: #babfc6;
 $color-primary: #e71d36;
 $color-secondary: #011627;
@@ -14,7 +14,8 @@ $container-width: 1000px;
 $font-family-body: 'Glegoo', serif;
 $font-family-logo: 'Julius Sans One', sans-serif;
 
-$section-main-min-height: 500px;
+$section-bg: #fff;
+$section-min-height: 500px;
 
 $btn-padding-vertical: 30px;
 $btn-padding-horizontal: 8px;
@@ -29,3 +30,24 @@ $btn-primary-bg: $color-primary;
 $btn-primary-color: #fff;
 $btn-primary-bg-hover: darken($btn-primary-bg, 5%);
 $btn-primary-color-hover: $btn-primary-color;
+
+$btn-secondary-bg: #454c52;
+$btn-secondary-color: #fff;
+$btn-secondary-bg-hover: darken($btn-secondary-bg, 5%);
+$btn-secondary-color-hover: $btn-secondary-color;
+
+$btn-disabled-bg: $color-base-secondary;
+$btn-disabled-color: darken($btn-disabled-bg, 30%);
+
+$notice-padding-vertical: 30px;
+$notice-padding-horizontal: 20px;
+$notice-border-radius: 4px;
+
+$notice-bg: lighten($color-base-secondary, 20%);
+$notice-color: $color-base;
+
+$notice-secondary-bg: lighten($color-base-secondary, 10%);
+$notice-secondary-color: $color-base;
+
+$notice-dark-bg: $btn-secondary-bg;
+$notice-dark-color: #fff;

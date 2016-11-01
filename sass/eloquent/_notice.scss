@@ -1,0 +1,17 @@
+.notice {
+    background: $notice-bg;
+    color: $notice-color;
+    padding: $notice-padding-horizontal $notice-padding-vertical;
+    border-radius: $notice-border-radius;
+    letter-spacing: 0.07em;
+
+    &.notice-secondary {
+        background: $notice-secondary-bg;
+        color: $notice-secondary-color;
+    }
+
+    &.notice-dark {
+        background: $notice-dark-bg;
+        color: $notice-dark-color;
+    }
+}

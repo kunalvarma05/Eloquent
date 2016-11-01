@@ -1,7 +1,8 @@
 .main {
     background: $color-secondary;
     color: $color-base-secondary;
-    min-height: $section-main-min-height;
+    min-height: $section-min-height;
+    overflow: hidden;
 }
 
 .header {
@@ -71,6 +72,6 @@
     > img {
         width: 100%;
         max-width: 100%;
-        margin-bottom: -8px;
+        margin-bottom: -9px;
     }
 }

@@ -1,0 +1,13 @@
+.section {
+    min-height: $section-min-height;
+    padding: 80px 0;
+    background: $section-bg;
+    .section-title {
+        font-size: 32px;
+        font-weight: normal;
+        color: darken($color-base-secondary, 30%);
+        margin-top: 0px;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+}

@@ -25,6 +25,7 @@ a {
 .flexbox {
     display: flex;
     flex-wrap: wrap;
+    align-content: center;
     &.row {
         flex-direction: row;
     }
@@ -34,8 +35,24 @@ a {
     &.space-between {
         justify-content: space-between;
     }
+    &.space-around {
+        justify-content: space-around;
+    }
     &.align-center {
         align-items: center;
         align-self: center;
     }
+
+    .flex-item {
+        flex-grow: 1;
+        flex-basis: 0;
+    }
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.pull-left {
+    float: left !important;
 }

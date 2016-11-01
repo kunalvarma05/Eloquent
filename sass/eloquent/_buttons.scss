@@ -10,15 +10,32 @@
         background: $btn-bg-hover;
         color: $btn-color-hover;
     }
-    &.btn-primary {
-        color: $btn-primary-color;
-        background: $btn-primary-bg;
-    }
 }
 
 .btn-primary {
+    color: $btn-primary-color;
+    background: $btn-primary-bg;
     &:hover, &:active, &:focus {
         background: $btn-primary-bg-hover;
         color: $btn-primary-color-hover;
+    }
+}
+
+.btn-secondary {
+    color: $btn-secondary-color;
+    background: $btn-secondary-bg;
+    &:hover, &:active, &:focus {
+        background: $btn-secondary-bg-hover;
+        color: $btn-secondary-color-hover;
+    }
+}
+
+.btn-disabled {
+    color: $btn-disabled-color;
+    background: $btn-disabled-bg;
+    cursor: default;
+    &:hover, &:active, &:focus {
+        color: $btn-disabled-color;
+        background: $btn-disabled-bg;
     }
 }

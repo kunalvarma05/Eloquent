@@ -1,0 +1,47 @@
+.feature-boxes {
+    margin-bottom: 15px;
+}
+
+.feature-box {
+    text-align: center;
+    background: lighten($color-base-secondary, 20%);
+    padding: 50px 30px;
+    display: block;
+    margin: 15px;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.1);
+        & > img {
+            filter: grayscale(0) contrast(100%) brightness(100%);
+            opacity: 1;
+        }
+    }
+
+    &:first-child {
+        margin-left: 0;
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    .feature-box-title {
+        font-size: 1.5em;
+        margin: 15px 0;
+    }
+
+    & > img {
+        width: 100px;
+        filter: grayscale(1) contrast(70%) brightness(60%);
+        opacity: 0.9;
+        transition: filter 0.3s ease-in-out;
+    }
+
+    .feature-box-details {
+        & > .btn {
+            padding: $btn-padding-horizontal ($btn-padding-vertical + 10);
+        }
+    }
+}

@@ -1,6 +1,6 @@
 html, body {
   background: #fff;
-  color: #10171d;
+  color: #2B3C4B;
   font-family: "Glegoo", serif;
   font-weight: normal;
   letter-spacing: 0.05em;
@@ -29,6 +29,8 @@ a:hover {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
 .flexbox.row {
@@ -50,6 +52,11 @@ a:hover {
           justify-content: space-between;
 }
 
+.flexbox.space-around {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
 .flexbox.align-center {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -57,6 +64,22 @@ a:hover {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+}
+
+.flexbox .flex-item {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.pull-left {
+  float: left !important;
 }
 
 /* -- Animation -- */
@@ -152,7 +175,7 @@ a:hover {
   color: #d4172e;
 }
 
-.btn.btn-primary {
+.btn-primary {
   color: #fff;
   background: #e71d36;
 }
@@ -162,10 +185,65 @@ a:hover {
   color: #fff;
 }
 
+.btn-secondary {
+  color: #fff;
+  background: #454c52;
+}
+
+.btn-secondary:hover, .btn-secondary:active, .btn-secondary:focus {
+  background: #393f44;
+  color: #fff;
+}
+
+.btn-disabled {
+  color: #69727f;
+  background: #babfc6;
+  cursor: default;
+}
+
+.btn-disabled:hover, .btn-disabled:active, .btn-disabled:focus {
+  color: #69727f;
+  background: #babfc6;
+}
+
+.notice {
+  background: #f2f3f4;
+  color: #2B3C4B;
+  padding: 20px 30px;
+  border-radius: 4px;
+  letter-spacing: 0.07em;
+}
+
+.notice.notice-secondary {
+  background: #d6d9dd;
+  color: #2B3C4B;
+}
+
+.notice.notice-dark {
+  background: #454c52;
+  color: #fff;
+}
+
+.section {
+  min-height: 500px;
+  padding: 80px 0;
+  background: #fff;
+}
+
+.section .section-title {
+  font-size: 32px;
+  font-weight: normal;
+  color: #69727f;
+  margin-top: 0px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
 .main {
   background: #011627;
   color: #babfc6;
   min-height: 500px;
+  overflow: hidden;
 }
 
 .header {
@@ -237,5 +315,59 @@ a:hover {
 .hero > img {
   width: 100%;
   max-width: 100%;
-  margin-bottom: -8px;
+  margin-bottom: -9px;
+}
+
+.feature-boxes {
+  margin-bottom: 15px;
+}
+
+.feature-box {
+  text-align: center;
+  background: #f2f3f4;
+  padding: 50px 30px;
+  display: block;
+  margin: 15px;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.feature-box:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.feature-box:hover > img {
+  -webkit-filter: grayscale(0) contrast(100%) brightness(100%);
+          filter: grayscale(0) contrast(100%) brightness(100%);
+  opacity: 1;
+}
+
+.feature-box:first-child {
+  margin-left: 0;
+}
+
+.feature-box:last-child {
+  margin-right: 0;
+}
+
+.feature-box .feature-box-title {
+  font-size: 1.5em;
+  margin: 15px 0;
+}
+
+.feature-box > img {
+  width: 100px;
+  -webkit-filter: grayscale(1) contrast(70%) brightness(60%);
+          filter: grayscale(1) contrast(70%) brightness(60%);
+  opacity: 0.9;
+  -webkit-transition: -webkit-filter 0.3s ease-in-out;
+  transition: -webkit-filter 0.3s ease-in-out;
+  transition: filter 0.3s ease-in-out;
+  transition: filter 0.3s ease-in-out, -webkit-filter 0.3s ease-in-out;
+}
+
+.feature-box .feature-box-details > .btn {
+  padding: 8px 40px;
 }
