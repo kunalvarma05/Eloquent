@@ -1,0 +1,41 @@
+html, body {
+    background: #fff;
+    color: $color-base;
+    font-family: $font-family-body;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    font-size: 14px;
+    height: 100%;
+    position: relative;
+}
+
+a {
+    color: $color-link;
+    text-decoration: none;
+    &:hover {
+        color: $color-link-hover;
+    }
+}
+
+.container {
+    max-width: $container-width;
+    margin: auto;
+}
+
+.flexbox {
+    display: flex;
+    flex-wrap: wrap;
+    &.row {
+        flex-direction: row;
+    }
+    &.center {
+        justify-content: center;
+    }
+    &.space-between {
+        justify-content: space-between;
+    }
+    &.align-center {
+        align-items: center;
+        align-self: center;
+    }
+}

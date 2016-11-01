@@ -1,0 +1,31 @@
+$color-base: #10171d;
+$color-base-secondary: #babfc6;
+$color-primary: #e71d36;
+$color-secondary: #011627;
+
+$color-link: $color-primary;
+$color-link-hover: darken($color-link, 5%);
+
+$color-link-secondary: lighten($color-secondary, 20%);
+$color-link-secondary-hover: darken($color-link-secondary, 5%);
+
+$container-width: 1000px;
+
+$font-family-body: 'Glegoo', serif;
+$font-family-logo: 'Julius Sans One', sans-serif;
+
+$section-main-min-height: 500px;
+
+$btn-padding-vertical: 30px;
+$btn-padding-horizontal: 8px;
+$btn-border-radius: 2px;
+
+$btn-bg: #fff;
+$btn-color: $color-primary;
+$btn-bg-hover: #F6F7F9;
+$btn-color-hover: darken($btn-color, 5%);
+
+$btn-primary-bg: $color-primary;
+$btn-primary-color: #fff;
+$btn-primary-bg-hover: darken($btn-primary-bg, 5%);
+$btn-primary-color-hover: $btn-primary-color;

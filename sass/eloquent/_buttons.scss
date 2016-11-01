@@ -1,0 +1,24 @@
+.btn {
+    display: inline-block;
+    padding: $btn-padding-horizontal $btn-padding-vertical;
+    border-radius: $btn-border-radius;
+    background: $btn-bg;
+    color: $btn-color;
+    transition: all 0.3s linear;
+    letter-spacing: 0.07em;
+    &:hover, &:active, &:focus {
+        background: $btn-bg-hover;
+        color: $btn-color-hover;
+    }
+    &.btn-primary {
+        color: $btn-primary-color;
+        background: $btn-primary-bg;
+    }
+}
+
+.btn-primary {
+    &:hover, &:active, &:focus {
+        background: $btn-primary-bg-hover;
+        color: $btn-primary-color-hover;
+    }
+}

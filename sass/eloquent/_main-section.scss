@@ -1,0 +1,76 @@
+.main {
+    background: $color-secondary;
+    color: $color-base-secondary;
+    min-height: $section-main-min-height;
+}
+
+.header {
+    padding: 70px 20px 0 20px;
+}
+
+.header .intro {
+    width: 60%;
+}
+
+.logo {
+    h1, h1 > a {
+        font-family: $font-family-logo;
+        font-size: 42px;
+        letter-spacing: 0em;
+        color: #fff;
+        font-weight: normal;
+        margin-top: 0;
+        margin-bottom: 0.4em;
+        text-transform: uppercase;
+    }
+    h2 {
+        font-size: 24px;
+        color: #e71d36;
+        margin-top: 0;
+        font-weight: normal;
+        letter-spacing: 0.05em;
+    }
+}
+
+.intro .description {
+    line-height: 2em;
+    color: #babfc6;
+}
+
+.actions {
+    margin-top: 20px;
+    -webkit-animation-delay: 0.5s;
+    animation-delay: 0.5s;
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+    .btn:first-child {
+        margin-right: 10px;
+        margin-bottom: 5px;
+    }
+}
+
+.links {
+    a {
+        color: #5E729B;
+        padding: 0 10px;
+        &:hover, &:focus, &:hover {
+            color: #4A67A1;
+        }
+    }
+    .divider {
+        color: #3E5466;
+    }
+}
+
+.hero {
+    margin-top: 35px;
+    -webkit-animation-delay: 0.8s;
+    animation-delay: 0.8s;
+    -webkit-animation-duration: 1.8s;
+    animation-duration: 1.8s;
+    > img {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: -8px;
+    }
+}
