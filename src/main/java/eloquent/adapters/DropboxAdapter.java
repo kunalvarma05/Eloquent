@@ -1,10 +1,15 @@
 package eloquent.adapters;
 
+import com.dropbox.core.DbxDownloader;
+import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
-
+import com.dropbox.core.v2.files.FileMetadata;
 import eloquent.exceptions.EloquentException;
 import eloquent.models.File;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 /**
  * @author Kunal
@@ -22,7 +27,37 @@ public class DropboxAdapter extends AbstractAdapter {
 
 	@Override
 	public File read(String path) throws EloquentException {
-		return null;
+		DbxDownloader<FileMetadata> fileDownload = null;
+		FileMetadata fileMetadata = null;
+		try {
+			fileDownload = this.client.files().download(path);
+		} catch (DbxException e) {
+			throw new EloquentException(e.getMessage());
+		}
+
+		String contents = "";
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+		try {
+			// Copy the contents of the file
+			// to the outputStream
+			fileMetadata = fileDownload.download(outputStream);
+
+			// outStream to String
+			contents = outputStream.toString();
+		} catch (DbxException | IOException e) {
+			throw new EloquentException(e.getMessage());
+		}
+
+		// Create the Eloquent File Object
+		File file = new File();
+		file.setPath(fileMetadata.getPathLower());
+		file.setName(fileMetadata.getName());
+		file.setTimestamp(fileMetadata.getServerModified());
+		file.setSize(Long.toString(fileMetadata.getSize()));
+		file.setContents(contents);
+
+		return file;
 	}
 
 	@Override
