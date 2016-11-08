@@ -19,6 +19,8 @@ local.properties
 *.jar
 *.war
 *.ear
+*.ipr
+*.iws
 
 # exclude out
 /out
