@@ -1,13 +1,22 @@
-package com.eloquent;
+package eloquent;
 
-import com.eloquent.adapters.AdapterInterface;
-import com.eloquent.adapters.LocalAdapter;
-import com.eloquent.exceptions.EloquentException;
-import com.eloquent.models.File;
+import eloquent.adapters.AdapterInterface;
+import eloquent.adapters.LocalAdapter;
+import eloquent.exceptions.EloquentException;
+import eloquent.models.File;
 
 public class Main {
 
-    public static void main(String[] args) {
+    /**
+     * Dropbox Access Token
+     */
+    private static final String ACCESS_TOKEN = "pHsUz289lkEAAAAAAAADivHzOVZUU4sXV0olTwMqwGtaVgGSty1ca7lRmMuJU-aN";
+
+	public static void main(String[] args) {
+
+	}
+
+	private void localTest() {
         // Root Directory
         String root = "X:/www";
         // Create Adapter

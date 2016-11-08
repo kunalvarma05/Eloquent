@@ -1,4 +1,4 @@
-package com.eloquent.exceptions;
+package eloquent.exceptions;
 
 /**
  * @author Kunal

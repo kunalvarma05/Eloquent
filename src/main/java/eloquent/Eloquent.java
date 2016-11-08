@@ -1,8 +1,8 @@
-package com.eloquent;
+package eloquent;
 
-import com.eloquent.adapters.AdapterInterface;
-import com.eloquent.exceptions.EloquentException;
-import com.eloquent.models.File;
+import eloquent.adapters.AdapterInterface;
+import eloquent.exceptions.EloquentException;
+import eloquent.models.File;
 
 public class Eloquent {
 

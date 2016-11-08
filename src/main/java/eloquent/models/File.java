@@ -1,4 +1,4 @@
-package com.eloquent.models;
+package eloquent.models;
 
 import java.util.Date;
 

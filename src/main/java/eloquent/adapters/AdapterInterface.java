@@ -1,7 +1,7 @@
-package com.eloquent.adapters;
+package eloquent.adapters;
 
-import com.eloquent.exceptions.EloquentException;
-import com.eloquent.models.File;
+import eloquent.exceptions.EloquentException;
+import eloquent.models.File;
 
 public interface AdapterInterface {
 

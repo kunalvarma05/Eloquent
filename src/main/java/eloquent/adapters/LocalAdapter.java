@@ -1,8 +1,8 @@
-package com.eloquent.adapters;
+package eloquent.adapters;
 
-import com.eloquent.exceptions.EloquentException;
-import com.eloquent.exceptions.FileNotFoundException;
-import com.eloquent.models.File;
+import eloquent.exceptions.EloquentException;
+import eloquent.exceptions.FileNotFoundException;
+import eloquent.models.File;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
