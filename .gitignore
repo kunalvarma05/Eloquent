@@ -2,6 +2,9 @@
 .gradle/
 build/
 
+# Main
+src/main/java/eloquent/Main.java
+
 # Maven build output folder
 /target/
 
