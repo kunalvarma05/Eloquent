@@ -25,7 +25,7 @@ public class LocalAdapter extends AbstractAdapter {
     protected String root = "";
 
     public LocalAdapter(String root) {
-        this.root = root;
+        this.setRoot(root);
     }
 
     public String getRoot() {
@@ -33,11 +33,39 @@ public class LocalAdapter extends AbstractAdapter {
     }
 
     public void setRoot(String root) {
+
+        // Add '/' at the end of
+        // the root if not present.
+        if (!root.endsWith("/")) {
+            root = root + "/";
+        }
+
+        // Set the root
         this.root = root;
+    }
+
+    /**
+     * Build the path
+     *
+     * @param path Path to a file or directory
+     *
+     * @return String
+     */
+    protected String buildPath(String path) {
+        String root = this.getRoot();
+
+        // The path to file/folder
+        // must start with a '/'.
+        if (!path.startsWith("/")) {
+            path = "/" + path;
+        }
+
+        return root + path;
     }
 
     @Override
     public File read(String path) throws EloquentException {
+        path = this.buildPath(path);
         java.io.File file = new java.io.File(path);
 
         // File doesn't exist
