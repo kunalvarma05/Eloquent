@@ -5,11 +5,16 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FileMetadata;
+import com.dropbox.core.v2.files.WriteMode;
 import eloquent.exceptions.EloquentException;
 import eloquent.models.File;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.util.Date;
 
 /**
  * @author Kunal
@@ -62,8 +67,29 @@ public class DropboxAdapter extends AbstractAdapter {
 
 	@Override
 	public File write(String path, String contents) throws EloquentException {
-		return null;
-	}
+        byte[] byteArray = contents.getBytes(Charset.defaultCharset());
+        FileMetadata fileMetadata = null;
+
+        try (InputStream in = new ByteArrayInputStream(byteArray)) {
+            fileMetadata = this.client.files().uploadBuilder(path)
+                    .withMode(WriteMode.ADD)
+                    .withClientModified(new Date())
+                    .uploadAndFinish(in);
+
+            // Create the Eloquent File Object
+            File file = new File();
+            file.setPath(fileMetadata.getPathLower())
+                    .setName(fileMetadata.getName())
+                    .setTimestamp(fileMetadata.getServerModified())
+                    .setSize(Long.toString(fileMetadata.getSize()))
+                    .setContents(contents);
+
+            return file;
+        } catch (IOException | DbxException ex) {
+            throw new EloquentException(ex.getMessage());
+        }
+
+    }
 
 	@Override
 	public File update(String path, String contents) throws EloquentException {
