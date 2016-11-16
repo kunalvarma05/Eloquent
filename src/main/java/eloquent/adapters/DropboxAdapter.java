@@ -32,64 +32,54 @@ public class DropboxAdapter extends AbstractAdapter {
 
 	@Override
 	public File read(String path) throws EloquentException {
-		DbxDownloader<FileMetadata> fileDownload = null;
-		FileMetadata fileMetadata = null;
 		try {
-			fileDownload = this.client.files().download(path);
-		} catch (DbxException e) {
-			throw new EloquentException(e.getMessage());
-		}
+			DbxDownloader<FileMetadata> fileDownload = this.client.files().download(path);
 
-		String contents = "";
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			String contents = "";
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-		try {
 			// Copy the contents of the file
 			// to the outputStream
-			fileMetadata = fileDownload.download(outputStream);
+			FileMetadata fileMetadata = fileDownload.download(outputStream);
 
 			// outStream to String
 			contents = outputStream.toString();
+
+			// Create the Eloquent File Object
+			File file = new File();
+			file.setPath(fileMetadata.getPathLower());
+			file.setName(fileMetadata.getName());
+			file.setTimestamp(fileMetadata.getServerModified());
+			file.setSize(Long.toString(fileMetadata.getSize()));
+			file.setContents(contents);
+
+			return file;
 		} catch (DbxException | IOException e) {
 			throw new EloquentException(e.getMessage());
 		}
-
-		// Create the Eloquent File Object
-		File file = new File();
-		file.setPath(fileMetadata.getPathLower());
-		file.setName(fileMetadata.getName());
-		file.setTimestamp(fileMetadata.getServerModified());
-		file.setSize(Long.toString(fileMetadata.getSize()));
-		file.setContents(contents);
-
-		return file;
 	}
 
 	@Override
 	public File write(String path, String contents) throws EloquentException {
-        byte[] byteArray = contents.getBytes(Charset.defaultCharset());
-        FileMetadata fileMetadata = null;
+		try {
+			byte[] byteArray = contents.getBytes(Charset.defaultCharset());
+            InputStream in = new ByteArrayInputStream(byteArray);
 
-        try (InputStream in = new ByteArrayInputStream(byteArray)) {
-            fileMetadata = this.client.files().uploadBuilder(path)
-                    .withMode(WriteMode.ADD)
-                    .withClientModified(new Date())
-                    .uploadAndFinish(in);
+			FileMetadata fileMetadata = this.client.files().uploadBuilder(path).withMode(WriteMode.ADD)
+					.withClientModified(new Date()).uploadAndFinish(in);
 
-            // Create the Eloquent File Object
-            File file = new File();
-            file.setPath(fileMetadata.getPathLower())
-                    .setName(fileMetadata.getName())
-                    .setTimestamp(fileMetadata.getServerModified())
-                    .setSize(Long.toString(fileMetadata.getSize()))
-                    .setContents(contents);
+			// Create the Eloquent File Object
+			File file = new File();
+			file.setPath(fileMetadata.getPathLower()).setName(fileMetadata.getName())
+					.setTimestamp(fileMetadata.getServerModified()).setSize(Long.toString(fileMetadata.getSize()))
+					.setContents(contents);
 
-            return file;
-        } catch (IOException | DbxException ex) {
-            throw new EloquentException(ex.getMessage());
-        }
+			return file;
+		} catch (IOException | DbxException ex) {
+			throw new EloquentException(ex.getMessage());
+		}
 
-    }
+	}
 
 	@Override
 	public File update(String path, String contents) throws EloquentException {
