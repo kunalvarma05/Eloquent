@@ -44,7 +44,7 @@ public class FileComparator implements Comparator<Metadata> {
             case "size":
                 return this.compareBySize(f1, f2);
             case "timestamp":
-                return this.compareByTimestamp(f2, f1);
+                return this.compareByTimestamp(f1, f2);
             default:
                 return this.compareByName(f1, f2);
         }
