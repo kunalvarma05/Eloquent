@@ -1,6 +1,7 @@
 package eloquent.adapters;
 
 import eloquent.exceptions.EloquentException;
+import eloquent.models.Directory;
 import eloquent.models.File;
 
 public interface AdapterInterface {
@@ -118,7 +119,7 @@ public interface AdapterInterface {
      *
      * @throws EloquentException Eloquent Exception
      */
-    boolean createDir(String path) throws EloquentException;
+    Directory createDir(String path) throws EloquentException;
 
 
 
