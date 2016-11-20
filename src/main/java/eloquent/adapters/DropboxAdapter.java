@@ -5,6 +5,7 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FileMetadata;
+import com.dropbox.core.v2.files.GetMetadataErrorException;
 import com.dropbox.core.v2.files.WriteMode;
 import eloquent.exceptions.EloquentException;
 import eloquent.models.File;
@@ -104,7 +105,19 @@ public class DropboxAdapter extends AbstractAdapter {
 
 	@Override
 	public boolean has(String path) throws EloquentException {
-		return false;
+        try {
+            FileMetadata metadata = (FileMetadata) this.client.files().getMetadata(path);
+
+            return !metadata.getName().isEmpty();
+        } catch (GetMetadataErrorException e) {
+            // Path not found
+            if (e.errorValue.isPath()) {
+                return false;
+            }
+            throw new EloquentException(e.errorValue.isPath() ? "is path" : "false");
+        } catch (DbxException e) {
+            throw new EloquentException(e.getMessage());
+        }
 	}
 
 	@Override
