@@ -27,7 +27,7 @@ public class LocalAdapter extends AbstractAdapter {
     /**
      * Local Filesystem Root
      */
-    private String root = "";
+    protected String root = "";
 
     public LocalAdapter(String root) {
         this.setRoot(root);
