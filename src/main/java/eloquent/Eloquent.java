@@ -55,8 +55,118 @@ public class Eloquent {
      * @param contents Contents to write
      *
      * @return {@link File}
+     *
+     * @throws EloquentException Eloquent Exception
      */
     public File write(String path, String contents) throws EloquentException {
         return this.getAdapater().write(path, contents);
+    }
+
+    /**
+     * Update a file.
+     *
+     * @param path File Path
+     * @param contents File contents
+     *
+     * @return {@link File}
+     *
+     * @throws EloquentException Eloquent Exception
+     */
+    File update(String path, String contents) throws EloquentException {
+        return this.getAdapater().update(path, contents);
+    }
+
+    /**
+     * Create or Update a file.
+     *
+     * @param path File Path
+     * @param contents File contents
+     *
+     * @return {@link File}
+     *
+     * @throws EloquentException Eloquent Exception
+     */
+    File put(String path, String contents) throws EloquentException {
+        return this.getAdapater().put(path, contents);
+    }
+
+    /**
+     * Check if a File exists or not
+     *
+     * @param path File Path
+     *
+     * @return boolean
+     *
+     * @throws EloquentException Eloquent Exception
+     */
+    boolean has(String path) throws EloquentException {
+        return this.getAdapater().has(path);
+    }
+
+    /**
+     * Rename a file
+     *
+     * @param path File Path
+     * @param newPath New path
+     *
+     * @return boolean
+     *
+     * @throws EloquentException Eloquent Exception
+     */
+    boolean rename(String path, String newPath) throws EloquentException {
+        return this.getAdapater().rename(path, newPath);
+    }
+
+    /**
+     * Copy a file
+     *
+     * @param path File Path
+     * @param newPath New path
+     *
+     * @return boolean
+     *
+     * @throws EloquentException Eloquent Exception
+     */
+    boolean copy(String path, String newPath) throws EloquentException {
+        return this.getAdapater().copy(path, newPath);
+    }
+
+    /**
+     * Delete a file
+     *
+     * @param path File Path
+     *
+     * @return boolean
+     *
+     * @throws EloquentException Eloquent Exception
+     */
+    boolean delete(String path) throws EloquentException {
+        return this.getAdapater().delete(path);
+    }
+
+    /**
+     * Delete a directory
+     *
+     * @param path File Path
+     *
+     * @return boolean
+     *
+     * @throws EloquentException Eloquent Exception
+     */
+    boolean deleteDir(String path) throws EloquentException {
+        return this.getAdapater().deleteDir(path);
+    }
+
+    /**
+     * Create a directory
+     *
+     * @param path File Path
+     *
+     * @return boolean
+     *
+     * @throws EloquentException Eloquent Exception
+     */
+    boolean createDir(String path) throws EloquentException {
+        return this.getAdapater().createDir(path);
     }
 }
