@@ -1,20 +1,16 @@
 package eloquent.adapters;
 
-import eloquent.models.File;
+import eloquent.exceptions.*;
 import eloquent.models.Directory;
+import eloquent.models.File;
+import eloquent.models.Metadata;
+
+import java.io.FileWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Date;
-import java.io.*;
 import java.util.List;
-
-import eloquent.exceptions.DirectoryAlreadyExistsException;
-import eloquent.exceptions.FileAlreadyExistsException;
-import eloquent.exceptions.DirectoryNotFoundException;
-import eloquent.exceptions.EloquentException;
-import eloquent.exceptions.FileNotFoundException;
-import eloquent.models.Metadata;
 
 
 /**
@@ -81,6 +77,8 @@ public class LocalAdapter extends AbstractAdapter {
      * @param path Path to a directory
      *
      * @return boolean
+     *
+     * @throws EloquentException Eloquent Exception
      */
     protected boolean isDir(String path) throws EloquentException {
 

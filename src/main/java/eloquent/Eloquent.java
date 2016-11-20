@@ -181,7 +181,7 @@ public class Eloquent {
      *
      * @return {@link Metadata}
      *
-     * @throws EloquentException
+     * @throws EloquentException Eloquent Exception
      */
     public Metadata getMetadata(String path) throws EloquentException {
         return this.getAdapter().getMetadata(path);
@@ -206,7 +206,7 @@ public class Eloquent {
      *
      * @param path Path of file to transfer
      *
-     * @return
+     * @return {@link Transfer}
      */
     public Transfer transfer(String path) {
         Transfer transfer = new Transfer(path);
@@ -214,7 +214,14 @@ public class Eloquent {
         return transfer.from(this.getAdapter());
     }
 
-
+    /**
+     * Batch Transfer from current FileSystem
+     * to Another Filesystem.
+     *
+     * @param files Path of files to transfer
+     *
+     * @return {@link BatchTransfer}
+     */
     public BatchTransfer batchTransfer(List<String> files) {
         BatchTransfer batchTransfer= new BatchTransfer(files);
 

@@ -34,28 +34,65 @@ public class BatchTransfer {
 		}
 	}
 
+    /**
+     * Add path of the file to transfer
+     *
+     * @param path Path of the file
+     *
+     * @return {@link BatchTransfer}
+     */
 	public BatchTransfer add(String path) {
 		return this.add(path, path);
 	}
 
+    /**
+     * Add path of the file and the new path
+     * of the file to transfer to.
+     *
+     * @param path Path of the file
+     * @param newPath New Path of the file
+     *
+     * @return {@link BatchTransfer}
+     */
 	public BatchTransfer add(String path, String newPath) {
 		this.paths.add(new BatchTransferFile(path, newPath));
 
 		return this;
 	}
 
+    /**
+     * Set the adapter to transfer the files to
+     *
+     * @param toAdapter The adapter to transfer the files to
+     *
+     * @return {@link BatchTransfer}
+     */
 	public BatchTransfer to(AdapterInterface toAdapter) {
 		this.toAdapter = toAdapter;
 
 		return this;
 	}
 
+    /**
+     * Set the adapter to transfer the files from
+     *
+     * @param fromAdapter The adapter to transfer the files from
+     *
+     * @return {@link BatchTransfer}
+     */
 	public BatchTransfer from(AdapterInterface fromAdapter) {
 		this.fromAdapter = fromAdapter;
 
 		return this;
 	}
 
+    /**
+     * Execute the batch Request and get the transferred files
+     *
+     * @return {@link List}
+     *
+     * @throws EloquentException Eloquent Exception
+     */
 	public List<File> getFiles() throws EloquentException {
 
 		while (!this.paths.isEmpty()) {

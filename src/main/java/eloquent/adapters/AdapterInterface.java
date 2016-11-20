@@ -25,7 +25,7 @@ public interface AdapterInterface {
      *
      * @return {@link Metadata}
      *
-     * @throws EloquentException
+     * @throws EloquentException Eloquent Exception
      */
     Metadata getMetadata(String path) throws EloquentException;
 

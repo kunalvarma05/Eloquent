@@ -6,11 +6,6 @@ import java.util.Comparator;
 
 /**
  * @author Kunal
- * @apiNote Usage:
- *
- *          Sort by name: Collections.sort(files, new FileComparator()); Sort by
- *          size: Collections.sort(files, new FileComparator("size")); Sort by
- *          timestamp: Collections.sort(files, new FileComparator("timestamp"));
  */
 public class FileComparator implements Comparator<Metadata> {
 
