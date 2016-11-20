@@ -174,6 +174,12 @@ public class DropboxAdapter extends AbstractAdapter {
 
 	@Override
 	public boolean createDir(String path) throws EloquentException {
-		return false;
+        try {
+            FolderMetadata metadata = this.client.files().createFolder(path, true);
+
+            return !metadata.getName().isEmpty();
+        } catch (DbxException e) {
+            throw new EloquentException(e.getMessage());
+        }
 	}
 }
