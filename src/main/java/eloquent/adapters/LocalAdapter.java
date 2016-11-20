@@ -71,8 +71,8 @@ public class LocalAdapter extends AbstractAdapter {
     @Override
     public File read(String path) throws EloquentException {
 
-				path = this.buildPath(path);
-				java.io.File file = new java.io.File(path);
+        path = this.buildPath(path);
+        java.io.File file = new java.io.File(path);
 
         // File doesn't exist
         if (!file.exists()) {
@@ -91,10 +91,10 @@ public class LocalAdapter extends AbstractAdapter {
             // Fetch the file size
             size = Long.toString(file.length());
 
-						// Fetch the file name
+            // Fetch the file name
             name = file.getName();
 
-						// Fetch the file timestamp (last modified)
+            // Fetch the file timestamp (last modified)
             timestamp = new Date(file.lastModified());
         } catch (Exception e) {
             throw new EloquentException(e.getMessage());
@@ -103,10 +103,10 @@ public class LocalAdapter extends AbstractAdapter {
         // Make the file model
         File fileModel = new File();
         fileModel.setPath(file.getAbsolutePath())
-                 .setContents(contents)
-                 .setSize(size)
-                 .setName(name)
-                 .setTimestamp(timestamp);
+                .setContents(contents)
+                .setSize(size)
+                .setName(name)
+                .setTimestamp(timestamp);
 
         // Return the file model
         return fileModel;
@@ -115,185 +115,185 @@ public class LocalAdapter extends AbstractAdapter {
     @Override
     public File write(String path, String contents) throws EloquentException {
 
-				path = this.buildPath(path);
+        path = this.buildPath(path);
 
-				java.io.File file = new java.io.File(path);
+        java.io.File file = new java.io.File(path);
 
-				// If file already exists
-				if (file.exists()) {
-					throw new FileAlreadyExistsException(path);
-				}
+        // If file already exists
+        if (file.exists()) {
+            throw new FileAlreadyExistsException(path);
+        }
 
-				try {
+        try {
 
-					file.createNewFile();
+            file.createNewFile();
 
-					// creates a FileWriter Object
-					FileWriter writer = new FileWriter(file);
+            // creates a FileWriter Object
+            FileWriter writer = new FileWriter(file);
 
-					// Writes the content to the file
-					writer.write(contents);
-					writer.flush();
-					writer.close();
+            // Writes the content to the file
+            writer.write(contents);
+            writer.flush();
+            writer.close();
 
-				} catch (Exception e) {
-						throw new EloquentException(e.getMessage());
-				}
+        } catch (Exception e) {
+            throw new EloquentException(e.getMessage());
+        }
 
-				// Make the file model
-				File fileModel = this.read(path);
+        // Make the file model
+        File fileModel = this.read(path);
 
-				// Return the file model
-				return fileModel;
+        // Return the file model
+        return fileModel;
 
     }
 
     @Override
     public File update(String path, String contents) throws EloquentException {
 
-				File file;
+        File file;
 
-				try {
-					file = this.read(path);
+        try {
+            file = this.read(path);
 
-					String oldContents;
-					oldContents = file.getContents();
+            String oldContents;
+            oldContents = file.getContents();
 
-					String newContents;
-					newContents = oldContents.concat(contents);
+            String newContents;
+            newContents = oldContents.concat(contents);
 
-					file.setContents(newContents);
+            file.setContents(newContents);
 
-				} catch (Exception e) {
-					throw new EloquentException(e.getMessage());
-				}
+        } catch (Exception e) {
+            throw new EloquentException(e.getMessage());
+        }
 
-				return file;
+        return file;
     }
 
     @Override
     public boolean has(String path) throws EloquentException {
 
-				path = this.buildPath(path);
-				java.io.File file = new java.io.File(path);
+        path = this.buildPath(path);
+        java.io.File file = new java.io.File(path);
 
-				boolean checkExists;
-				checkExists = file.exists();
+        boolean checkExists;
+        checkExists = file.exists();
 
-				return checkExists;
+        return checkExists;
     }
 
     @Override
     public boolean rename(String oldPath, String newPath) throws EloquentException {
 
-				oldPath = this.buildPath(oldPath);
-				java.io.File file = new java.io.File(oldPath);
+        oldPath = this.buildPath(oldPath);
+        java.io.File file = new java.io.File(oldPath);
 
-				// File doesn't exist
-				if (!file.exists()) {
-					throw new FileNotFoundException(oldPath);
-				}
+        // File doesn't exist
+        if (!file.exists()) {
+            throw new FileNotFoundException(oldPath);
+        }
 
-				boolean renameFlag;
+        boolean renameFlag;
 
-				// Renaming file
-				renameFlag = file.renameTo(new java.io.File(newPath));
+        // Renaming file
+        renameFlag = file.renameTo(new java.io.File(newPath));
 
-				return renameFlag;
+        return renameFlag;
     }
 
     @Override
     public boolean copy(String path, String newPath) throws EloquentException {
 
-				File file1 = this.read(path);
+        File file1 = this.read(path);
 
-				String file1Contents = file1.getContents();
+        String file1Contents = file1.getContents();
 
-				this.write(newPath, file1Contents);
+        this.write(newPath, file1Contents);
 
-				// @TODO Fix return value
-				return true;
+        // @TODO Fix return value
+        return true;
 
     }
 
     @Override
     public boolean delete(String path) throws EloquentException {
 
-				path = this.buildPath(path);
-				java.io.File file = new java.io.File(path);
+        path = this.buildPath(path);
+        java.io.File file = new java.io.File(path);
 
-				// File doesn't exist
-				if (!file.exists()) {
-					throw new FileNotFoundException(path);
-				}
+        // File doesn't exist
+        if (!file.exists()) {
+            throw new FileNotFoundException(path);
+        }
 
-				boolean deleteFlag;
+        boolean deleteFlag;
 
-				// Deleting file
-				deleteFlag = file.delete();
+        // Deleting file
+        deleteFlag = file.delete();
 
-				return deleteFlag;
+        return deleteFlag;
     }
 
     @Override
     public boolean deleteDir(String path) throws EloquentException {
 
-				path = this.buildPath(path);
-				java.io.File file = new java.io.File(path);
+        path = this.buildPath(path);
+        java.io.File file = new java.io.File(path);
 
-				// Directory doesn't exist
-				if (!file.isDirectory()) {
-					throw new DirectoryNotFoundException(path);
-				}
+        // Directory doesn't exist
+        if (!file.isDirectory()) {
+            throw new DirectoryNotFoundException(path);
+        }
 
-				boolean deleteFlag;
+        boolean deleteFlag;
 
-				// Deleting file
-				deleteFlag = deleteDirRecursively(file);
+        // Deleting file
+        deleteFlag = deleteDirRecursively(file);
 
-				return deleteFlag;
+        return deleteFlag;
     }
 
     private boolean deleteDirRecursively(java.io.File file) throws EloquentException {
 
-			String[] children = file.list();
+        String[] children = file.list();
 
-			boolean success = false;
+        boolean success = false;
 
-			try {
-				for (String aChildren : children) {
-					success = deleteDirRecursively(new java.io.File(file, aChildren));
-					if (!success) {
-						return false;
-					}
-				}
-			} catch (Exception e) {
-					throw new EloquentException(e.getMessage());
-			}
+        try {
+            for (String aChildren : children) {
+                success = deleteDirRecursively(new java.io.File(file, aChildren));
+                if (!success) {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            throw new EloquentException(e.getMessage());
+        }
 
-			return success;
+        return success;
     }
 
     @Override
     public boolean createDir(String path) throws EloquentException {
 
-				path = this.buildPath(path);
-				java.io.File file = new java.io.File(path);
+        path = this.buildPath(path);
+        java.io.File file = new java.io.File(path);
 
-				boolean dirCreated;
+        boolean dirCreated;
 
-				try {
-					// Creates directory
-					dirCreated = file.mkdir();
-				} catch (Exception e) {
-					throw new EloquentException(e.getMessage());
-				}
+        try {
+            // Creates directory
+            dirCreated = file.mkdir();
+        } catch (Exception e) {
+            throw new EloquentException(e.getMessage());
+        }
 
-				// Directory already exists
-				if (!dirCreated) {
-					throw new DirectoryAlreadyExistsException(path);
-				}
+        // Directory already exists
+        if (!dirCreated) {
+            throw new DirectoryAlreadyExistsException(path);
+        }
 
-				return dirCreated;
+        return dirCreated;
     }
 }
