@@ -1,11 +1,13 @@
 package eloquent.adapters;
 
 import eloquent.models.File;
+import eloquent.models.Directory;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Date;
 import java.io.*;
+import java.util.List;
 
 import eloquent.exceptions.DirectoryAlreadyExistsException;
 import eloquent.exceptions.FileAlreadyExistsException;
@@ -156,13 +158,7 @@ public class LocalAdapter extends AbstractAdapter {
         try {
             file = this.read(path);
 
-            String oldContents;
-            oldContents = file.getContents();
-
-            String newContents;
-            newContents = oldContents.concat(contents);
-
-            file.setContents(newContents);
+            file.setContents(contents);
 
         } catch (Exception e) {
             throw new EloquentException(e.getMessage());
@@ -274,16 +270,16 @@ public class LocalAdapter extends AbstractAdapter {
     }
 
     @Override
-    public boolean createDir(String path) throws EloquentException {
+    public Directory createDir(String path) throws EloquentException {
 
         path = this.buildPath(path);
-        java.io.File file = new java.io.File(path);
+        java.io.File dir = new java.io.File(path);
 
         boolean dirCreated;
 
         try {
             // Creates directory
-            dirCreated = file.mkdir();
+            dirCreated = dir.mkdir();
         } catch (Exception e) {
             throw new EloquentException(e.getMessage());
         }
@@ -293,6 +289,40 @@ public class LocalAdapter extends AbstractAdapter {
             throw new DirectoryAlreadyExistsException(path);
         }
 
-        return dirCreated;
+        // Directory Model
+        Directory dirModel = new Directory(path);
+
+        return dirModel;
+    }
+
+    @Override
+    public Directory readDir(String path) throws EloquentException {
+
+        path = this.buildPath(path);
+
+        java.io.File dir = new java.io.File(path);
+
+        // Directory not found
+        if (!dir.isDirectory()) {
+            throw new DirectoryNotFoundException(path);
+        }
+
+        String filePaths[] = dir.list();
+
+        List<File> filesList = null;
+
+        try {
+            for (String filePath: filePaths) {
+                File a = this.read(filePath);
+                filesList.add(a);
+            }
+        } catch (Exception e) {
+            throw new EloquentException(e.getMessage());
+        }
+
+        Directory dirModel = new Directory(path, filesList);
+
+        return dirModel;
+
     }
 }

@@ -127,11 +127,22 @@ public interface AdapterInterface {
      *
      * @param path File Path
      *
-     * @return boolean
+     * @return {@link Directory}
      *
      * @throws EloquentException Eloquent Exception
      */
     Directory createDir(String path) throws EloquentException;
+
+    /**
+     * Read / View a directory
+     *
+     * @param path File Path
+     *
+     * @return {@link Directory}
+     *
+     * @throws EloquentException Eloquent Exception
+     */
+    Directory readDir(String path) throws EloquentException;
 
 
 
