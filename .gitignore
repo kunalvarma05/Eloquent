@@ -14,6 +14,7 @@ intellij/
 *.iml
 gradle.properties
 local.properties
+.project
 
 # Package Files #
 *.jar
