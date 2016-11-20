@@ -2,11 +2,7 @@ package eloquent.models;
 
 import java.util.Date;
 
-public class File {
-
-    protected String name;
-
-    protected String path;
+public class File extends Metadata {
 
     protected String contents;
 
@@ -24,15 +20,6 @@ public class File {
     }
 
     /**
-     * Get file path
-     *
-     * @return String
-     */
-    public String getPath() {
-        return path;
-    }
-
-    /**
      * Set file path
      *
      * @param path File path
@@ -40,7 +27,20 @@ public class File {
      * @return {@link File}
      */
     public File setPath(String path) {
-        this.path = path;
+        super.setPath(path);
+
+        return this;
+    }
+
+    /**
+     * Set file name
+     *
+     * @param name File name File name
+     *
+     * @return {@link File}
+     */
+    public File setName(String name) {
+        super.setName(name);
 
         return this;
     }
@@ -63,28 +63,6 @@ public class File {
      */
     public File setContents(String contents) {
         this.contents = contents;
-
-        return this;
-    }
-
-    /**
-     * Get file name
-     *
-     * @return String
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Set file name
-     *
-     * @param name File name File name
-     *
-     * @return {@link File}
-     */
-    public File setName(String name) {
-        this.name = name;
 
         return this;
     }

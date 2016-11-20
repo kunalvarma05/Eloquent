@@ -8,6 +8,7 @@ import com.dropbox.core.v2.files.*;
 import eloquent.exceptions.EloquentException;
 import eloquent.models.Directory;
 import eloquent.models.File;
+import eloquent.models.Metadata;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -58,6 +59,29 @@ public class DropboxAdapter extends AbstractAdapter {
 			throw new EloquentException(e.getMessage());
 		}
 	}
+
+    /**
+     * Get metadata of a File or Directory
+     *
+     * @param path Path to file or folder
+     *
+     * @return {@link Metadata}
+     *
+     * @throws EloquentException
+     */
+    public Metadata getMetadata(String path) throws EloquentException {
+        try {
+            com.dropbox.core.v2.files.Metadata metadata = this.client.files().getMetadata(path);
+
+            Metadata meta = new Metadata();
+            meta.setName(metadata.getName())
+                    .setPath(metadata.getPathLower());
+
+            return meta;
+        } catch (DbxException e) {
+            throw new EloquentException(e.getMessage());
+        }
+    }
 
 	@Override
 	public File write(String path, String contents) throws EloquentException {
@@ -130,7 +154,7 @@ public class DropboxAdapter extends AbstractAdapter {
 			MoveBuilder moveBuilder = this.client.files().moveBuilder(path, newPath);
 			moveBuilder.withAutorename(true);
 
-			Metadata metadata = moveBuilder.start();
+			com.dropbox.core.v2.files.Metadata metadata = moveBuilder.start();
 
 			return !metadata.getPathLower().equals(newPath);
 		} catch (DbxException e) {
