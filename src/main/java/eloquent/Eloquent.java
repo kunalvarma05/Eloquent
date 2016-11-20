@@ -209,7 +209,7 @@ public class Eloquent {
     public Transfer transfer(String path) {
         Transfer transfer = new Transfer(path);
 
-        return transfer.from(this.getAdapater());
+        return transfer.from(this.getAdapter());
     }
 
 
