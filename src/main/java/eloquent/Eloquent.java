@@ -198,5 +198,19 @@ public class Eloquent {
         return this.getAdapater().readDir(path);
     }
 
+    /**
+     * File Transfer from current FileSystem
+     * to Another Filesystem.
+     *
+     * @param path Path of file to transfer
+     *
+     * @return
+     */
+    public Transfer transfer(String path) {
+        Transfer transfer = new Transfer(path);
+
+        return transfer.from(this.getAdapater());
+    }
+
 
 }
