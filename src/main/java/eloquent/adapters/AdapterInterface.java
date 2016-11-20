@@ -3,6 +3,7 @@ package eloquent.adapters;
 import eloquent.exceptions.EloquentException;
 import eloquent.models.Directory;
 import eloquent.models.File;
+import eloquent.models.Metadata;
 
 public interface AdapterInterface {
 
@@ -16,6 +17,17 @@ public interface AdapterInterface {
      * @throws EloquentException Eloquent Exception
      */
     File read(String path) throws EloquentException;
+
+    /**
+     * Get metadata of a File or Directory
+     *
+     * @param path Path to file or folder
+     *
+     * @return {@link Metadata}
+     *
+     * @throws EloquentException
+     */
+    Metadata getMetadata(String path) throws EloquentException;
 
     /**
      * Write a new file.
