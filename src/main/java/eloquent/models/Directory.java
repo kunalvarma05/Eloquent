@@ -1,5 +1,8 @@
 package eloquent.models;
 
+import eloquent.FileComparator;
+
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,6 +21,11 @@ public class Directory extends Metadata {
         this.setFiles(files);
     }
 
+    /**
+     * Get List of files inside the directory
+     *
+     * @return List
+     */
     public List<File> getFiles() {
         return files;
     }
@@ -48,9 +56,45 @@ public class Directory extends Metadata {
         return this;
     }
 
+    /**
+     * Set Files inside the directory
+     *
+     * @param files List of files
+     *
+     * @return {@link Directory}
+     */
     public Directory setFiles(List<File> files) {
         this.files = files;
 
         return this;
+    }
+
+    /**
+     * Sort files inside the directory based on a key
+     *
+     * @param sortBy Sorting key
+     *
+     * @return List
+     */
+    public List<File> sort(String sortBy) {
+
+        Collections.sort(this.getFiles(), new FileComparator(sortBy));
+
+        return this.getFiles();
+    }
+
+    /**
+     * Sort files inside the directory based on a key
+     *
+     * @param sortBy Sorting key
+     * @param order Sorting order
+     *
+     * @return List
+     */
+    public List<File> sort(String sortBy, String order) {
+
+        Collections.sort(this.getFiles(), new FileComparator(sortBy, order));
+
+        return this.getFiles();
     }
 }

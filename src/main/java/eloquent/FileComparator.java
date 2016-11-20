@@ -17,6 +17,11 @@ public class FileComparator implements Comparator<File> {
     private static final String DEFAULT_COMPARISON_KEY = "name";
 
     protected String key;
+    protected String order;
+
+    protected final String ascKey = "asc";
+    protected final String descKey = "desc";
+    protected final String defaultOrder = ascKey;
 
     public FileComparator() {
         this.key = DEFAULT_COMPARISON_KEY;
@@ -24,17 +29,47 @@ public class FileComparator implements Comparator<File> {
 
     public FileComparator(String key) {
         this.key = key;
+        this.order = defaultOrder;
     }
 
-    @Override
+    public FileComparator(String key, String order) {
+        this.key = key;
+        this.order = order;
+    }
+
     public int compare(File f1, File f2) {
+
         switch (this.key) {
             case "size":
-                return this.compareBySize(f1, f2);
+                switch (order) {
+                    case ascKey:
+                        return this.compareBySize(f1, f2);
+
+                    case descKey:
+                        return this.compareBySize(f2, f1);
+
+                }
             case "timestamp":
-                return this.compareByTimestamp(f1, f2);
+                switch (order) {
+                    case ascKey:
+                        return this.compareByTimestamp(f1, f2);
+
+                    case descKey:
+                        return this.compareByTimestamp(f2, f1);
+                }
+
             default:
-                return this.compareByName(f1, f2);
+                switch (order) {
+                    case ascKey:
+                        return this.compareByName(f1, f2);
+
+                    case descKey:
+                        return this.compareByName(f2, f1);
+
+                    default:
+                        return this.compareByName(f1, f2);
+                }
+
         }
     }
 
@@ -59,6 +94,7 @@ public class FileComparator implements Comparator<File> {
      * @return int
      */
     protected int compareBySize(File f1, File f2) {
+
         int s1 = Integer.parseInt(f1.getSize());
         int s2 = Integer.parseInt(f2.getSize());
 
