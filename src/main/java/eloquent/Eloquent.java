@@ -16,7 +16,7 @@ public class Eloquent {
      * @param adapter {@link AdapterInterface}
      */
     public Eloquent(AdapterInterface adapter) {
-        this.setAdapater(adapter);
+        this.setAdapter(adapter);
     }
 
     /**
@@ -24,7 +24,7 @@ public class Eloquent {
      *
      * @return {@link AdapterInterface}
      */
-    public AdapterInterface getAdapater() {
+    public AdapterInterface getAdapter() {
         return this.adapter;
     }
 
@@ -33,7 +33,7 @@ public class Eloquent {
      *
      * @param adapter {@link AdapterInterface}
      */
-    public void setAdapater(AdapterInterface adapter) {
+    public void setAdapter(AdapterInterface adapter) {
         this.adapter = adapter;
     }
 
@@ -47,7 +47,7 @@ public class Eloquent {
      * @throws EloquentException Eloquent Exception
      */
     public File read(String path) throws EloquentException {
-        return this.getAdapater().read(path);
+        return this.getAdapter().read(path);
     }
 
     /**
@@ -61,7 +61,7 @@ public class Eloquent {
      * @throws EloquentException Eloquent Exception
      */
     public File write(String path, String contents) throws EloquentException {
-        return this.getAdapater().write(path, contents);
+        return this.getAdapter().write(path, contents);
     }
 
     /**
@@ -75,7 +75,7 @@ public class Eloquent {
      * @throws EloquentException Eloquent Exception
      */
     File update(String path, String contents) throws EloquentException {
-        return this.getAdapater().update(path, contents);
+        return this.getAdapter().update(path, contents);
     }
 
     /**
@@ -89,7 +89,7 @@ public class Eloquent {
      * @throws EloquentException Eloquent Exception
      */
     File put(String path, String contents) throws EloquentException {
-        return this.getAdapater().put(path, contents);
+        return this.getAdapter().put(path, contents);
     }
 
     /**
@@ -102,7 +102,7 @@ public class Eloquent {
      * @throws EloquentException Eloquent Exception
      */
     boolean has(String path) throws EloquentException {
-        return this.getAdapater().has(path);
+        return this.getAdapter().has(path);
     }
 
     /**
@@ -116,7 +116,7 @@ public class Eloquent {
      * @throws EloquentException Eloquent Exception
      */
     boolean rename(String path, String newPath) throws EloquentException {
-        return this.getAdapater().rename(path, newPath);
+        return this.getAdapter().rename(path, newPath);
     }
 
     /**
@@ -130,7 +130,7 @@ public class Eloquent {
      * @throws EloquentException Eloquent Exception
      */
     File copy(String path, String newPath) throws EloquentException {
-        return this.getAdapater().copy(path, newPath);
+        return this.getAdapter().copy(path, newPath);
     }
 
     /**
@@ -143,7 +143,7 @@ public class Eloquent {
      * @throws EloquentException Eloquent Exception
      */
     boolean delete(String path) throws EloquentException {
-        return this.getAdapater().delete(path);
+        return this.getAdapter().delete(path);
     }
 
     /**
@@ -156,7 +156,7 @@ public class Eloquent {
      * @throws EloquentException Eloquent Exception
      */
     boolean deleteDir(String path) throws EloquentException {
-        return this.getAdapater().deleteDir(path);
+        return this.getAdapter().deleteDir(path);
     }
 
     /**
@@ -169,7 +169,7 @@ public class Eloquent {
      * @throws EloquentException Eloquent Exception
      */
     Directory createDir(String path) throws EloquentException {
-        return this.getAdapater().createDir(path);
+        return this.getAdapter().createDir(path);
     }
 
     /**
@@ -182,7 +182,7 @@ public class Eloquent {
      * @throws EloquentException
      */
     public Metadata getMetadata(String path) throws EloquentException {
-        return this.getAdapater().getMetadata(path);
+        return this.getAdapter().getMetadata(path);
     }
 
     /**
@@ -195,7 +195,7 @@ public class Eloquent {
      * @throws EloquentException Eloquent Exception
      */
     public Directory readDir(String path) throws EloquentException {
-        return this.getAdapater().readDir(path);
+        return this.getAdapter().readDir(path);
     }
 
     /**

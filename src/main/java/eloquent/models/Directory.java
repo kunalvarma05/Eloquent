@@ -12,6 +12,8 @@ public class Directory extends Metadata {
 
     protected List<Metadata> files;
 
+    public final boolean isDir = true;
+
     public Directory(String path) {
         this.setPath(path);
     }
