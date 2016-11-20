@@ -2,6 +2,7 @@ package eloquent;
 
 import eloquent.adapters.AdapterInterface;
 import eloquent.exceptions.EloquentException;
+import eloquent.models.Directory;
 import eloquent.models.File;
 
 public class Eloquent {
@@ -166,7 +167,7 @@ public class Eloquent {
      *
      * @throws EloquentException Eloquent Exception
      */
-    boolean createDir(String path) throws EloquentException {
+    Directory createDir(String path) throws EloquentException {
         return this.getAdapater().createDir(path);
     }
 }
