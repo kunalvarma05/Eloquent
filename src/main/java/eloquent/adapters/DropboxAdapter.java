@@ -104,6 +104,11 @@ public class DropboxAdapter extends AbstractAdapter {
 	}
 
 	@Override
+    public File put(String path, String contents) throws EloquentException {
+        return this.update(path, contents);
+    }
+
+	@Override
 	public boolean has(String path) throws EloquentException {
         try {
             FileMetadata metadata = (FileMetadata) this.client.files().getMetadata(path);
