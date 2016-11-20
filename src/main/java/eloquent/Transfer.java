@@ -12,8 +12,7 @@ public class Transfer {
     protected String fromPath;
     protected File file;
 
-    Transfer(String path)
-    {
+    Transfer(String path) {
         this.fromPath = path;
         this.toPath = path;
     }
