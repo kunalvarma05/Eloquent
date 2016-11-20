@@ -10,23 +10,18 @@ import java.util.List;
  */
 public class Directory extends Metadata {
 
-    protected List<File> files;
+    protected List<Metadata> files;
 
     public Directory(String path) {
         this.setPath(path);
     }
 
-    public Directory(String path, List<File> files) {
+    public Directory(String path, List<Metadata> files) {
         this.setPath(path);
         this.setFiles(files);
     }
 
-    /**
-     * Get List of files inside the directory
-     *
-     * @return List
-     */
-    public List<File> getFiles() {
+    public List<Metadata> getFiles() {
         return files;
     }
 
@@ -63,7 +58,7 @@ public class Directory extends Metadata {
      *
      * @return {@link Directory}
      */
-    public Directory setFiles(List<File> files) {
+    public Directory setFiles(List<Metadata> files) {
         this.files = files;
 
         return this;
@@ -76,7 +71,7 @@ public class Directory extends Metadata {
      *
      * @return List
      */
-    public List<File> sort(String sortBy) {
+    public List<Metadata> sort(String sortBy) {
 
         Collections.sort(this.getFiles(), new FileComparator(sortBy));
 
@@ -91,9 +86,16 @@ public class Directory extends Metadata {
      *
      * @return List
      */
-    public List<File> sort(String sortBy, String order) {
+    public List<Metadata> sort(String sortBy, String order) {
 
-        Collections.sort(this.getFiles(), new FileComparator(sortBy, order));
+        switch (order) {
+            case "asc":
+                this.sort(sortBy);
+
+            case "desc":
+                Collections.sort(this.getFiles(), new FileComparator(sortBy));
+                Collections.reverse(this.getFiles());
+        }
 
         return this.getFiles();
     }

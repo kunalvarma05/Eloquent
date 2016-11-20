@@ -316,9 +316,11 @@ public class LocalAdapter extends AbstractAdapter {
 
         String filePaths[] = dir.list();
 
-        List<File> filesList = null;
+        List<Metadata> filesList = null;
 
         try {
+            // @TODO case: recursive directory
+
             for (String filePath: filePaths) {
                 File a = this.read(filePath);
                 filesList.add(a);

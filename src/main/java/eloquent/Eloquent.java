@@ -4,6 +4,7 @@ import eloquent.adapters.AdapterInterface;
 import eloquent.exceptions.EloquentException;
 import eloquent.models.Directory;
 import eloquent.models.File;
+import eloquent.models.Metadata;
 
 public class Eloquent {
 
@@ -170,4 +171,32 @@ public class Eloquent {
     Directory createDir(String path) throws EloquentException {
         return this.getAdapater().createDir(path);
     }
+
+    /**
+     * Get metadata of a File or Directory
+     *
+     * @param path Path to file or folder
+     *
+     * @return {@link Metadata}
+     *
+     * @throws EloquentException
+     */
+    public Metadata getMetadata(String path) throws EloquentException {
+        return this.getAdapater().getMetadata(path);
+    }
+
+    /**
+     * Read / View a directory
+     *
+     * @param path File Path
+     *
+     * @return {@link Directory}
+     *
+     * @throws EloquentException Eloquent Exception
+     */
+    public Directory readDir(String path) throws EloquentException {
+        return this.getAdapater().readDir(path);
+    }
+
+
 }

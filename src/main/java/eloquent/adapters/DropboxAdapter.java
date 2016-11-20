@@ -15,7 +15,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Kunal
@@ -60,28 +62,19 @@ public class DropboxAdapter extends AbstractAdapter {
 		}
 	}
 
-    /**
-     * Get metadata of a File or Directory
-     *
-     * @param path Path to file or folder
-     *
-     * @return {@link Metadata}
-     *
-     * @throws EloquentException
-     */
-    public Metadata getMetadata(String path) throws EloquentException {
-        try {
-            com.dropbox.core.v2.files.Metadata metadata = this.client.files().getMetadata(path);
+	@Override
+	public Metadata getMetadata(String path) throws EloquentException {
+		try {
+			com.dropbox.core.v2.files.Metadata metadata = this.client.files().getMetadata(path);
 
-            Metadata meta = new Metadata();
-            meta.setName(metadata.getName())
-                    .setPath(metadata.getPathLower());
+			Metadata meta = new Metadata();
+			meta.setName(metadata.getName()).setPath(metadata.getPathLower());
 
-            return meta;
-        } catch (DbxException e) {
-            throw new EloquentException(e.getMessage());
-        }
-    }
+			return meta;
+		} catch (DbxException e) {
+			throw new EloquentException(e.getMessage());
+		}
+	}
 
 	@Override
 	public File write(String path, String contents) throws EloquentException {
@@ -199,21 +192,51 @@ public class DropboxAdapter extends AbstractAdapter {
 
 	@Override
 	public Directory createDir(String path) throws EloquentException {
-        try {
-            FolderMetadata metadata = this.client.files().createFolder(path, true);
+		try {
+			FolderMetadata metadata = this.client.files().createFolder(path, true);
 
-            Directory directory = new Directory(path);
-            directory.setPath(metadata.getPathLower())
-                    .setName(metadata.getName());
-            
-            return directory;
-        } catch (DbxException e) {
-            throw new EloquentException(e.getMessage());
-        }
+			Directory directory = new Directory(path);
+			directory.setPath(metadata.getPathLower()).setName(metadata.getName());
+
+			return directory;
+		} catch (DbxException e) {
+			throw new EloquentException(e.getMessage());
+		}
 	}
 
 	@Override
 	public Directory readDir(String path) throws EloquentException {
-		return null;
+		try {
+			Metadata metadata = this.getMetadata(path);
+			ListFolderBuilder listFolderBuilder = this.client.files().listFolderBuilder(path);
+
+			ListFolderResult listFolderResult = listFolderBuilder.start();
+			List<com.dropbox.core.v2.files.Metadata> items = listFolderResult.getEntries();
+			List<Metadata> files = new ArrayList<>();
+
+			for (com.dropbox.core.v2.files.Metadata meta : items) {
+				if (meta instanceof FolderMetadata) {
+					Directory f = new Directory(meta.getPathLower());
+					f.setName(meta.getName());
+					files.add(f);
+				} else {
+					File f = new File();
+					long size = ((FileMetadata) meta).getSize();
+					Date timestamp = ((FileMetadata) meta).getServerModified();
+					f.setName(meta.getName()).setPath(meta.getPathLower()).setSize(Long.toString(size))
+							.setTimestamp(timestamp);
+
+					files.add(f);
+				}
+			}
+
+			Directory directory = new Directory(path);
+			directory.setPath(metadata.getPath()).setName(metadata.getName()).setFiles(files);
+
+			return directory;
+		} catch (DbxException e) {
+			throw new EloquentException(e.getMessage());
+		}
 	}
+
 }
