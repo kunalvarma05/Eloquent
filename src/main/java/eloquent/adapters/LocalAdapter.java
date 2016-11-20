@@ -117,8 +117,21 @@ public class LocalAdapter extends AbstractAdapter {
 
     @Override
     public Metadata getMetadata(String path) throws EloquentException {
-        // @TODO
-        return null;
+
+        path = this.buildPath(path);
+        java.io.File file = new java.io.File(path);
+
+        // File doesn't exist
+        if (!file.exists()) {
+            throw new FileNotFoundException(path);
+        }
+
+        Metadata metadataModel = new Metadata();
+
+        metadataModel.setName(file.getName())
+                    .setPath(file.getPath());
+
+        return metadataModel;
     }
 
     @Override
