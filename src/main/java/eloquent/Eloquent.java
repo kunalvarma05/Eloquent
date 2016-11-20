@@ -127,7 +127,7 @@ public class Eloquent {
      *
      * @throws EloquentException Eloquent Exception
      */
-    boolean copy(String path, String newPath) throws EloquentException {
+    File copy(String path, String newPath) throws EloquentException {
         return this.getAdapater().copy(path, newPath);
     }
 
