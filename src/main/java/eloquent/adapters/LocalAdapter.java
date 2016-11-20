@@ -60,6 +60,7 @@ public class LocalAdapter extends AbstractAdapter {
      * @return String
      */
     protected String buildPath(String path) {
+
         String root = this.getRoot();
 
         // The path to file/folder
@@ -68,13 +69,39 @@ public class LocalAdapter extends AbstractAdapter {
             path = "/" + path;
         }
 
-        return root + path;
+        path = root + path;
+
+        // URL fix for directories
+        return path.replaceAll("//", "/");
+    }
+
+    /**
+     * Checks if given path is Directory
+     *
+     * @param path Path to a directory
+     *
+     * @return boolean
+     */
+    protected boolean isDir(String path) throws EloquentException {
+
+        path = this.buildPath(path);
+
+        java.io.File file = new java.io.File(path);
+
+        // File doesn't exist
+        if (!file.exists()) {
+            throw new FileNotFoundException(path);
+        }
+
+        return file.isDirectory();
+
     }
 
     @Override
     public File read(String path) throws EloquentException {
 
         path = this.buildPath(path);
+
         java.io.File file = new java.io.File(path);
 
         // File doesn't exist
@@ -293,6 +320,7 @@ public class LocalAdapter extends AbstractAdapter {
     public Directory createDir(String path) throws EloquentException {
 
         path = this.buildPath(path);
+
         java.io.File dir = new java.io.File(path);
 
         boolean dirCreated;
@@ -318,7 +346,7 @@ public class LocalAdapter extends AbstractAdapter {
     @Override
     public Directory readDir(String path) throws EloquentException {
 
-        path = this.buildPath(path);
+        this.root = this.buildPath(path);
 
         java.io.File dir = new java.io.File(path);
 
@@ -331,15 +359,23 @@ public class LocalAdapter extends AbstractAdapter {
 
         List<Metadata> filesList = null;
 
+//      @TODO Fix filesList
         try {
-            // @TODO case: recursive directory
-
+            System.out.println("Reading directory");
             for (String filePath: filePaths) {
-                File a = this.read(filePath);
-                filesList.add(a);
+                File f = this.read(filePath);
+//                Metadata a = this.read(filePath);
+//                 System.out.println(a.getContents());
+                filesList.add(f);
             }
         } catch (Exception e) {
+            System.out.println("wtf");
             throw new EloquentException(e.getMessage());
+        }
+
+        for (int i = 0; i < filesList.size(); i++) {
+            System.out.println("File: " + i);
+            System.out.println(filesList.get(i));
         }
 
         Directory dirModel = new Directory(path, filesList);
