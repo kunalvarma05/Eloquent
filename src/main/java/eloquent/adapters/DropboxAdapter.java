@@ -6,6 +6,7 @@ import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.*;
 import eloquent.exceptions.EloquentException;
+import eloquent.models.Directory;
 import eloquent.models.File;
 
 import java.io.ByteArrayInputStream;
@@ -173,11 +174,15 @@ public class DropboxAdapter extends AbstractAdapter {
 	}
 
 	@Override
-	public boolean createDir(String path) throws EloquentException {
+	public Directory createDir(String path) throws EloquentException {
         try {
             FolderMetadata metadata = this.client.files().createFolder(path, true);
 
-            return !metadata.getName().isEmpty();
+            Directory directory = new Directory(path);
+            directory.setPath(metadata.getPathLower())
+                    .setName(metadata.getName());
+            
+            return directory;
         } catch (DbxException e) {
             throw new EloquentException(e.getMessage());
         }
