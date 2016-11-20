@@ -139,7 +139,21 @@ public class DropboxAdapter extends AbstractAdapter {
 
 	@Override
 	public File copy(String path, String newPath) throws EloquentException {
-		return null;
+        try {
+            CopyBuilder copyBuilder = this.client.files().copyBuilder(path, newPath);
+            copyBuilder.withAutorename(true);
+
+            FileMetadata fileMetadata = (FileMetadata) copyBuilder.start();
+
+            // Create the Eloquent File Object
+            File file = new File();
+            file.setPath(fileMetadata.getPathLower()).setName(fileMetadata.getName())
+                    .setTimestamp(fileMetadata.getServerModified()).setSize(Long.toString(fileMetadata.getSize()));
+
+            return file;
+        } catch (DbxException e) {
+            throw new EloquentException(e.getMessage());
+        }
 	}
 
 	@Override
