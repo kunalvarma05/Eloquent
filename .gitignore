@@ -25,3 +25,6 @@ local.properties
 
 # exclude out
 /out
+
+# exclude api
+/api
