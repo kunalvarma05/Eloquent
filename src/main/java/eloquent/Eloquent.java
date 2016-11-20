@@ -6,6 +6,8 @@ import eloquent.models.Directory;
 import eloquent.models.File;
 import eloquent.models.Metadata;
 
+import java.util.List;
+
 public class Eloquent {
 
     protected AdapterInterface adapter;
@@ -210,6 +212,13 @@ public class Eloquent {
         Transfer transfer = new Transfer(path);
 
         return transfer.from(this.getAdapter());
+    }
+
+
+    public BatchTransfer batchTransfer(List<String> files) {
+        BatchTransfer batchTransfer= new BatchTransfer(files);
+
+        return batchTransfer.from(this.getAdapter());
     }
 
 
