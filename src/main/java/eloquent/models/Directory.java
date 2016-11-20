@@ -7,18 +7,18 @@ import java.util.List;
  */
 public class Directory extends Metadata {
 
-    protected List<File> files;
+    protected List<Metadata> files;
 
     public Directory(String path) {
         this.setPath(path);
     }
 
-    public Directory(String path, List<File> files) {
+    public Directory(String path, List<Metadata> files) {
         this.setPath(path);
         this.setFiles(files);
     }
 
-    public List<File> getFiles() {
+    public List<Metadata> getFiles() {
         return files;
     }
 
@@ -48,7 +48,7 @@ public class Directory extends Metadata {
         return this;
     }
 
-    public Directory setFiles(List<File> files) {
+    public Directory setFiles(List<Metadata> files) {
         this.files = files;
 
         return this;
