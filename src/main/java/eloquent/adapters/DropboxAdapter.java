@@ -102,68 +102,74 @@ public class DropboxAdapter extends AbstractAdapter {
 	}
 
 	@Override
-    public File put(String path, String contents) throws EloquentException {
-        return this.update(path, contents);
-    }
+	public File put(String path, String contents) throws EloquentException {
+		return this.update(path, contents);
+	}
 
 	@Override
 	public boolean has(String path) throws EloquentException {
-        try {
-            FileMetadata metadata = (FileMetadata) this.client.files().getMetadata(path);
+		try {
+			FileMetadata metadata = (FileMetadata) this.client.files().getMetadata(path);
 
-            return !metadata.getName().isEmpty();
-        } catch (GetMetadataErrorException e) {
-            // Path not found
-            if (e.errorValue.isPath()) {
-                return false;
-            }
-            throw new EloquentException(e.errorValue.isPath() ? "is path" : "false");
-        } catch (DbxException e) {
-            throw new EloquentException(e.getMessage());
-        }
+			return !metadata.getName().isEmpty();
+		} catch (GetMetadataErrorException e) {
+			// Path not found
+			if (e.errorValue.isPath()) {
+				return false;
+			}
+			throw new EloquentException(e.getMessage());
+		} catch (DbxException e) {
+			throw new EloquentException(e.getMessage());
+		}
 	}
 
 	@Override
 	public boolean rename(String path, String newPath) throws EloquentException {
-        try {
-            MoveBuilder moveBuilder = this.client.files().moveBuilder(path, newPath);
-            moveBuilder.withAutorename(true);
+		try {
+			MoveBuilder moveBuilder = this.client.files().moveBuilder(path, newPath);
+			moveBuilder.withAutorename(true);
 
-            Metadata metadata = moveBuilder.start();
+			Metadata metadata = moveBuilder.start();
 
-            return !metadata.getPathLower().equals(newPath);
-        } catch (DbxException e) {
-            throw new EloquentException(e.getMessage());
-        }
+			return !metadata.getPathLower().equals(newPath);
+		} catch (DbxException e) {
+			throw new EloquentException(e.getMessage());
+		}
 	}
 
 	@Override
 	public File copy(String path, String newPath) throws EloquentException {
-        try {
-            CopyBuilder copyBuilder = this.client.files().copyBuilder(path, newPath);
-            copyBuilder.withAutorename(true);
+		try {
+			CopyBuilder copyBuilder = this.client.files().copyBuilder(path, newPath);
+			copyBuilder.withAutorename(true);
 
-            FileMetadata fileMetadata = (FileMetadata) copyBuilder.start();
+			FileMetadata fileMetadata = (FileMetadata) copyBuilder.start();
 
-            // Create the Eloquent File Object
-            File file = new File();
-            file.setPath(fileMetadata.getPathLower()).setName(fileMetadata.getName())
-                    .setTimestamp(fileMetadata.getServerModified()).setSize(Long.toString(fileMetadata.getSize()));
+			// Create the Eloquent File Object
+			File file = new File();
+			file.setPath(fileMetadata.getPathLower()).setName(fileMetadata.getName())
+					.setTimestamp(fileMetadata.getServerModified()).setSize(Long.toString(fileMetadata.getSize()));
 
-            return file;
-        } catch (DbxException e) {
-            throw new EloquentException(e.getMessage());
-        }
+			return file;
+		} catch (DbxException e) {
+			throw new EloquentException(e.getMessage());
+		}
 	}
 
 	@Override
 	public boolean delete(String path) throws EloquentException {
-		return false;
+		try {
+			FileMetadata metadata = (FileMetadata) this.client.files().delete(path);
+
+			return !metadata.getName().isEmpty();
+		} catch (DbxException e) {
+			throw new EloquentException(e.getMessage());
+		}
 	}
 
 	@Override
 	public boolean deleteDir(String path) throws EloquentException {
-		return false;
+		return this.deleteDir(path);
 	}
 
 	@Override
