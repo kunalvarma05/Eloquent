@@ -65,17 +65,28 @@ public class Directory extends Metadata {
     }
 
     /**
+     * Sort files inside the directory
+     *
+     * @return {@link Directory}
+     */
+    public Directory sort() {
+        this.getFiles().sort(new FileComparator());
+
+        return this;
+    }
+
+    /**
      * Sort files inside the directory based on a key
      *
      * @param sortBy Sorting key
      *
-     * @return List
+     * @return {@link Directory}
      */
-    public List<Metadata> sort(String sortBy) {
+    public Directory sort(String sortBy) {
 
-        Collections.sort(this.getFiles(), new FileComparator(sortBy));
+        this.getFiles().sort(new FileComparator(sortBy));
 
-        return this.getFiles();
+        return this;
     }
 
     /**
@@ -84,19 +95,20 @@ public class Directory extends Metadata {
      * @param sortBy Sorting key
      * @param order Sorting order
      *
-     * @return List
+     * @return {@link Directory}
      */
-    public List<Metadata> sort(String sortBy, String order) {
-
+    public Directory sort(String sortBy, String order) {
         switch (order) {
-            case "asc":
-                this.sort(sortBy);
-
             case "desc":
-                Collections.sort(this.getFiles(), new FileComparator(sortBy));
+                // Sort ascending
+                this.sort(sortBy);
+                // Reverse
                 Collections.reverse(this.getFiles());
+
+            default:
+                this.sort(sortBy);
         }
 
-        return this.getFiles();
+        return this;
     }
 }
