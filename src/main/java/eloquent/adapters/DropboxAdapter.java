@@ -238,4 +238,5 @@ public class DropboxAdapter extends AbstractAdapter {
 			throw new EloquentException(e.getMessage());
 		}
 	}
+
 }

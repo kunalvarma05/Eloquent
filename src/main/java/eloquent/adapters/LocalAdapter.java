@@ -14,6 +14,7 @@ import eloquent.exceptions.FileAlreadyExistsException;
 import eloquent.exceptions.DirectoryNotFoundException;
 import eloquent.exceptions.EloquentException;
 import eloquent.exceptions.FileNotFoundException;
+import eloquent.models.Metadata;
 
 
 /**
@@ -112,6 +113,12 @@ public class LocalAdapter extends AbstractAdapter {
 
         // Return the file model
         return fileModel;
+    }
+
+    @Override
+    public Metadata getMetadata(String path) throws EloquentException {
+        // @TODO
+        return null;
     }
 
     @Override
@@ -309,9 +316,11 @@ public class LocalAdapter extends AbstractAdapter {
 
         String filePaths[] = dir.list();
 
-        List<File> filesList = null;
+        List<Metadata> filesList = null;
 
         try {
+            // @TODO case: recursive directory
+
             for (String filePath: filePaths) {
                 File a = this.read(filePath);
                 filesList.add(a);

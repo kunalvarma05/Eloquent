@@ -35,7 +35,7 @@ public class File extends Metadata {
     /**
      * Set file name
      *
-     * @param name File name File name
+     * @param name File name
      *
      * @return {@link File}
      */

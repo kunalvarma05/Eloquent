@@ -1,6 +1,7 @@
 package eloquent;
 
 import eloquent.models.File;
+import eloquent.models.Metadata;
 
 import java.util.Comparator;
 
@@ -12,22 +13,33 @@ import java.util.Comparator;
  * Sort by size: Collections.sort(files, new FileComparator("size"));
  * Sort by timestamp: Collections.sort(files, new FileComparator("timestamp"));
  */
-public class FileComparator implements Comparator<File> {
+public class FileComparator implements Comparator<Metadata> {
 
-    private static final String DEFAULT_COMPARISION_KEY = "name";
+    private static final String DEFAULT_COMPARISON_KEY = "name";
 
     protected String key;
+    protected String order;
+
+    protected final String ascKey = "asc";
+    protected final String descKey = "desc";
+    protected final String defaultOrder = ascKey;
 
     public FileComparator() {
-        this.key = DEFAULT_COMPARISION_KEY;
+        this.key = DEFAULT_COMPARISON_KEY;
     }
 
     public FileComparator(String key) {
         this.key = key;
+        this.order = defaultOrder;
     }
 
-    @Override
-    public int compare(File f1, File f2) {
+    public FileComparator(String key, String order) {
+        this.key = key;
+        this.order = order;
+    }
+
+    public int compare(Metadata f1, Metadata f2) {
+
         switch (this.key) {
             case "size":
                 return this.compareBySize(f1, f2);
@@ -46,7 +58,7 @@ public class FileComparator implements Comparator<File> {
      *
      * @return int
      */
-    protected int compareByName(File f1, File f2) {
+    protected int compareByName(Metadata f1, Metadata f2) {
         return f1.getName().compareTo(f2.getName());
     }
 
@@ -58,7 +70,8 @@ public class FileComparator implements Comparator<File> {
      *
      * @return int
      */
-    protected int compareBySize(File f1, File f2) {
+    protected int compareBySize(Metadata f1, Metadata f2) {
+
         int s1 = Integer.parseInt(f1.getSize());
         int s2 = Integer.parseInt(f2.getSize());
 
@@ -73,7 +86,7 @@ public class FileComparator implements Comparator<File> {
      *
      * @return int
      */
-    protected int compareByTimestamp(File f1, File f2) {
+    protected int compareByTimestamp(Metadata f1, Metadata f2) {
         return f1.getTimestamp().compareTo(f2.getTimestamp());
     }
 
