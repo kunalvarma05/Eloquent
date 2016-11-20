@@ -187,4 +187,9 @@ public class DropboxAdapter extends AbstractAdapter {
             throw new EloquentException(e.getMessage());
         }
 	}
+
+	@Override
+	public Directory readDir(String path) throws EloquentException {
+		return null;
+	}
 }

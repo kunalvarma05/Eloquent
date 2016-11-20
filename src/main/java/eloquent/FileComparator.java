@@ -14,12 +14,12 @@ import java.util.Comparator;
  */
 public class FileComparator implements Comparator<File> {
 
-    private static final String DEFAULT_COMPARISION_KEY = "name";
+    private static final String DEFAULT_COMPARISON_KEY = "name";
 
     protected String key;
 
     public FileComparator() {
-        this.key = DEFAULT_COMPARISION_KEY;
+        this.key = DEFAULT_COMPARISON_KEY;
     }
 
     public FileComparator(String key) {
