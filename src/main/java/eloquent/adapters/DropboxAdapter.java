@@ -97,8 +97,8 @@ public class DropboxAdapter extends AbstractAdapter {
 	}
 
 	@Override
-	public boolean copy(String path, String newPath) throws EloquentException {
-		return false;
+	public File copy(String path, String newPath) throws EloquentException {
+		return null;
 	}
 
 	@Override

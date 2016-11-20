@@ -81,11 +81,11 @@ public interface AdapterInterface {
      * @param path File Path
      * @param newPath New path
      *
-     * @return boolean
+     * @return {@link File}
      *
      * @throws EloquentException Eloquent Exception
      */
-    boolean copy(String path, String newPath) throws EloquentException;
+    File copy(String path, String newPath) throws EloquentException;
 
     /**
      * Delete a file

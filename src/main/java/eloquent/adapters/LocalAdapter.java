@@ -203,16 +203,15 @@ public class LocalAdapter extends AbstractAdapter {
     }
 
     @Override
-    public boolean copy(String path, String newPath) throws EloquentException {
+    public File copy(String path, String newPath) throws EloquentException {
 
         File file1 = this.read(path);
 
         String file1Contents = file1.getContents();
 
-        this.write(newPath, file1Contents);
+        File file2 = this.write(newPath, file1Contents);
 
-        // @TODO Fix return value
-        return true;
+        return file2;
 
     }
 
