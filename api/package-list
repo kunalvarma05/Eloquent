@@ -1,0 +1,4 @@
+eloquent
+eloquent.adapters
+eloquent.exceptions
+eloquent.models
