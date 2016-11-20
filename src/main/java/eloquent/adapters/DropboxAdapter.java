@@ -4,9 +4,7 @@ import com.dropbox.core.DbxDownloader;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
-import com.dropbox.core.v2.files.FileMetadata;
-import com.dropbox.core.v2.files.GetMetadataErrorException;
-import com.dropbox.core.v2.files.WriteMode;
+import com.dropbox.core.v2.files.*;
 import eloquent.exceptions.EloquentException;
 import eloquent.models.File;
 
@@ -127,7 +125,16 @@ public class DropboxAdapter extends AbstractAdapter {
 
 	@Override
 	public boolean rename(String path, String newPath) throws EloquentException {
-		return false;
+        try {
+            MoveBuilder moveBuilder = this.client.files().moveBuilder(path, newPath);
+            moveBuilder.withAutorename(true);
+
+            Metadata metadata = moveBuilder.start();
+
+            return !metadata.getPathLower().equals(newPath);
+        } catch (DbxException e) {
+            throw new EloquentException(e.getMessage());
+        }
 	}
 
 	@Override
