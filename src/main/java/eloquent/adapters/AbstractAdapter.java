@@ -8,8 +8,8 @@ public abstract class AbstractAdapter implements AdapterInterface {
     /**
      * Create or Update a file.
      *
-     * @param path
-     * @param contents
+     * @param path Path to file
+     * @param contents Contents of the file
      *
      * @return {@link File}
      */
