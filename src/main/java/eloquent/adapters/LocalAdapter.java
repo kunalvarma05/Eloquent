@@ -156,13 +156,7 @@ public class LocalAdapter extends AbstractAdapter {
         try {
             file = this.read(path);
 
-            String oldContents;
-            oldContents = file.getContents();
-
-            String newContents;
-            newContents = oldContents.concat(contents);
-
-            file.setContents(newContents);
+            file.setContents(contents);
 
         } catch (Exception e) {
             throw new EloquentException(e.getMessage());
