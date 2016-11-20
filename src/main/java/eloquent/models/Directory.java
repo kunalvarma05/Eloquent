@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author Kunal
  */
-public class Directory extends File {
+public class Directory extends Metadata {
 
     protected List<File> files;
 
@@ -22,7 +22,35 @@ public class Directory extends File {
         return files;
     }
 
-    public void setFiles(List<File> files) {
+    /**
+     * Set file path
+     *
+     * @param path File path
+     *
+     * @return {@link Directory}
+     */
+    public Directory setPath(String path) {
+        super.setPath(path);
+
+        return this;
+    }
+
+    /**
+     * Set file name
+     *
+     * @param name File name File name
+     *
+     * @return {@link Directory}
+     */
+    public Directory setName(String name) {
+        super.setName(name);
+
+        return this;
+    }
+
+    public Directory setFiles(List<File> files) {
         this.files = files;
+
+        return this;
     }
 }
