@@ -6,10 +6,6 @@ public class File extends Metadata {
 
     protected String contents;
 
-    protected Date timestamp;
-
-    protected String size;
-
     public File() {
         super();
     }
@@ -68,15 +64,6 @@ public class File extends Metadata {
     }
 
     /**
-     * Get Timestamp
-     *
-     * @return Date
-     */
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    /**
      * Set Timestamp
      *
      * @param timestamp File timestamp
@@ -87,15 +74,6 @@ public class File extends Metadata {
         this.timestamp = timestamp;
 
         return this;
-    }
-
-    /**
-     * Get file size
-     *
-     * @return String
-     */
-    public String getSize() {
-        return size;
     }
 
     /**
