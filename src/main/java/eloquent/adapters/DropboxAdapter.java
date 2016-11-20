@@ -63,7 +63,7 @@ public class DropboxAdapter extends AbstractAdapter {
 	public File write(String path, String contents) throws EloquentException {
 		try {
 			byte[] byteArray = contents.getBytes(Charset.defaultCharset());
-            InputStream in = new ByteArrayInputStream(byteArray);
+			InputStream in = new ByteArrayInputStream(byteArray);
 
 			FileMetadata fileMetadata = this.client.files().uploadBuilder(path).withMode(WriteMode.ADD)
 					.withClientModified(new Date()).uploadAndFinish(in);
@@ -83,7 +83,23 @@ public class DropboxAdapter extends AbstractAdapter {
 
 	@Override
 	public File update(String path, String contents) throws EloquentException {
-		return null;
+		try {
+			byte[] byteArray = contents.getBytes(Charset.defaultCharset());
+			InputStream in = new ByteArrayInputStream(byteArray);
+
+			FileMetadata fileMetadata = this.client.files().uploadBuilder(path).withMode(WriteMode.OVERWRITE)
+					.withClientModified(new Date()).uploadAndFinish(in);
+
+			// Create the Eloquent File Object
+			File file = new File();
+			file.setPath(fileMetadata.getPathLower()).setName(fileMetadata.getName())
+					.setTimestamp(fileMetadata.getServerModified()).setSize(Long.toString(fileMetadata.getSize()))
+					.setContents(contents);
+
+			return file;
+		} catch (IOException | DbxException ex) {
+			throw new EloquentException(ex.getMessage());
+		}
 	}
 
 	@Override
