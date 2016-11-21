@@ -9,10 +9,10 @@ import java.util.Map;
  */
 public class InMemoryFileSystem {
 
-	Map<String, FSObject> files;
+	protected static Map<String, FSObject> files;
 
 	public InMemoryFileSystem() {
-		this.files = new HashMap<>();
+		files = new HashMap<>();
 	}
 
 	public Map<String, FSObject> getFiles() {
@@ -20,7 +20,7 @@ public class InMemoryFileSystem {
 	}
 
 	public void setFiles(Map<String, FSObject> files) {
-		this.files = files;
+		InMemoryFileSystem.files = files;
 	}
 
 	/**
@@ -58,7 +58,8 @@ public class InMemoryFileSystem {
             FSFile file = new FSFile();
             String size = Long.toString(contents.length());
             file.setName(extractName(path)).setPath(path).setSize(size).setTimestamp(new Date()).setContents(contents);
-            return (FSFile) this.getFiles().put(path, file);
+			this.getFiles().put(path, file);
+			return file;
         } else {
             throw new InMemoryFileSystemException("Path " + path + " not found!");
         }
@@ -258,7 +259,7 @@ public class InMemoryFileSystem {
 	protected static String extractName(String path) {
         int index = path.lastIndexOf("/");
 
-        return path.substring(index);
+        return path.substring(index + 1);
     }
 
 }

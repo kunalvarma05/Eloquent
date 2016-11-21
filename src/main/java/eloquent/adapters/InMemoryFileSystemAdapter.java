@@ -55,11 +55,11 @@ public class InMemoryFileSystemAdapter extends AbstractAdapter {
 	public File write(String path, String contents) throws EloquentException {
         try {
             FSFile file = this.filesystem.write(path, contents);
-            File meta = new File();
-            meta.setName(file.getName());
-            meta.setSize(file.getSize());
-            meta.setContents(file.getContents());
-            meta.setTimestamp(file.getTimestamp());
+            File meta = new File(path, contents);
+            meta.setName(file.getName())
+                    .setSize(file.getSize())
+                    .setContents(file.getContents())
+                    .setTimestamp(file.getTimestamp());
 
             return meta;
         } catch (InMemoryFileSystemException e) {

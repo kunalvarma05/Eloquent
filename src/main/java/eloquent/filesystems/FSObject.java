@@ -16,7 +16,7 @@ public class FSObject {
 	protected Date timestamp;
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public FSObject setName(String name) {

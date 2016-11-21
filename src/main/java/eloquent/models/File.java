@@ -23,7 +23,7 @@ public class File extends Metadata {
      * @return {@link File}
      */
     public File setPath(String path) {
-        super.setPath(path);
+        this.path = path;
 
         return this;
     }
@@ -36,7 +36,7 @@ public class File extends Metadata {
      * @return {@link File}
      */
     public File setName(String name) {
-        super.setName(name);
+        this.name = name;
 
         return this;
     }

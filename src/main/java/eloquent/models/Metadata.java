@@ -43,7 +43,7 @@ public class Metadata {
      * @return String
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
