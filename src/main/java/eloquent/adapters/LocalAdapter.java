@@ -344,7 +344,7 @@ public class LocalAdapter extends AbstractAdapter {
     @Override
     public Directory readDir(String path) throws EloquentException {
 
-        this.root = this.buildPath(path);
+        path = this.buildPath(path);
 
         java.io.File dir = new java.io.File(path);
 

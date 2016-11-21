@@ -101,7 +101,7 @@ public class BatchTransfer {
 			BatchTransferFile transferFile = this.paths.poll();
 
 			Transfer transfer = new Transfer(transferFile.getPath());
-			transfer.from(this.fromAdapter).to(this.toAdapter).at(transferFile.getNewpath());
+			transfer.from(this.fromAdapter).to(this.toAdapter).at(transferFile.getNewPath());
 
 			try {
 				File file = transfer.getFile();

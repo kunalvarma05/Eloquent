@@ -8,7 +8,7 @@ public class BatchTransferFile {
 	protected String path;
 
 	protected String newPath;
-g
+
 	public BatchTransferFile(String path, String newPath) {
 		this.setPath(path).setNewPath(newPath);
 	}
