@@ -59,7 +59,7 @@ public class LocalAdapter extends AbstractAdapter {
 	protected String buildPath(String path) {
 		path = path.replaceAll("//", "/");
 		path = path.replace("\\", "/");
-        String root = this.getRoot();
+		String root = this.getRoot();
 
 		// Absolute path has not been given
 		if (!path.startsWith(root)) {
