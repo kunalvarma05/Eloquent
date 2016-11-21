@@ -7,10 +7,10 @@ public class BatchTransferFile {
 
 	protected String path;
 
-	protected String newpath;
-
-	public BatchTransferFile(String path, String newpath) {
-		this.setPath(path).setNewpath(newpath);
+	protected String newPath;
+g
+	public BatchTransferFile(String path, String newPath) {
+		this.setPath(path).setNewPath(newPath);
 	}
 
 	/**
@@ -40,19 +40,19 @@ public class BatchTransferFile {
 	 *
 	 * @return New path of the file
 	 */
-	public String getNewpath() {
-		return newpath;
+	public String getNewPath() {
+		return newPath;
 	}
 
 	/**
 	 * Set path of the file
 	 *
-	 * @param newpath Set new path of the file
+	 * @param newPath Set new path of the file
 	 *
 	 * @return {@link BatchTransferFile}
 	 */
-	public BatchTransferFile setNewpath(String newpath) {
-		this.newpath = newpath;
+	public BatchTransferFile setNewPath(String newPath) {
+		this.newPath = newPath;
 
 		return this;
 	}
