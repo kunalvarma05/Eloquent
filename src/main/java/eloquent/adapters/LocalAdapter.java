@@ -9,9 +9,9 @@ import java.io.FileWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 
 /**
  * @author dhruvdutt
@@ -51,34 +51,40 @@ public class LocalAdapter extends AbstractAdapter {
     /**
      * Build the path
      *
-     * @param path Path to a file or directory
+     * @param path
+     *            Path to a file or directory
      *
      * @return String
      */
     protected String buildPath(String path) {
-
+        path = path.replaceAll("//", "/");
+        path = path.replace("\\", "/");
         String root = this.getRoot();
 
-        // The path to file/folder
-        // must start with a '/'.
-        if (!path.startsWith("/")) {
-            path = "/" + path;
+        // Absolute path has not been given
+        if (!path.startsWith(root)) {
+            // The path to file/folder
+            // must start with a '/'.
+            if (!path.startsWith("/")) {
+                path = "/" + path;
+            }
+
+            path = root + path;
         }
 
-        path = root + path;
-
-        // URL fix for directories
-        return path.replaceAll("//", "/");
+        return path;
     }
 
     /**
      * Checks if given path is Directory
      *
-     * @param path Path to a directory
+     * @param path
+     *            Path to a directory
      *
      * @return boolean
      *
-     * @throws EloquentException Eloquent Exception
+     * @throws EloquentException
+     *             Eloquent Exception
      */
     protected boolean isDir(String path) throws EloquentException {
 
@@ -130,10 +136,7 @@ public class LocalAdapter extends AbstractAdapter {
 
         // Make the file model
         File fileModel = new File();
-        fileModel.setPath(file.getAbsolutePath())
-                .setContents(contents)
-                .setSize(size)
-                .setName(name)
+        fileModel.setPath(file.getAbsolutePath()).setContents(contents).setSize(size).setName(name)
                 .setTimestamp(timestamp);
 
         // Return the file model
@@ -153,8 +156,7 @@ public class LocalAdapter extends AbstractAdapter {
 
         Metadata metadataModel = new Metadata();
 
-        metadataModel.setName(file.getName())
-                    .setPath(file.getPath());
+        metadataModel.setName(file.getName()).setPath(file.getPath());
 
         return metadataModel;
     }
@@ -353,32 +355,31 @@ public class LocalAdapter extends AbstractAdapter {
             throw new DirectoryNotFoundException(path);
         }
 
-        String filePaths[] = dir.list();
+        List<Metadata> fileList = new ArrayList<>();
 
-        List<Metadata> filesList = null;
-
-//      @TODO Fix filesList
         try {
-            System.out.println("Reading directory");
-            for (String filePath: filePaths) {
-                File f = this.read(filePath);
-//                Metadata a = this.read(filePath);
-//                 System.out.println(a.getContents());
-                filesList.add(f);
+            java.io.File[] files = dir.listFiles();
+
+            assert files != null;
+            for (java.io.File file : files) {
+                if (file.isDirectory()) {
+                    Directory metadata = new Directory(path);
+                    metadata.setName(file.getName()).setTimestamp(new Date(file.lastModified()));
+
+                    fileList.add(metadata);
+                } else {
+                    fileList.add(this.read(file.getPath()));
+                }
             }
+
         } catch (Exception e) {
-            System.out.println("wtf");
             throw new EloquentException(e.getMessage());
         }
 
-        for (int i = 0; i < filesList.size(); i++) {
-            System.out.println("File: " + i);
-            System.out.println(filesList.get(i));
-        }
+        Directory directory = new Directory(dir.getAbsolutePath(), fileList);
 
-        Directory dirModel = new Directory(path, filesList);
+        directory.setName(dir.getName()).setTimestamp(new Date(dir.lastModified()));
 
-        return dirModel;
-
+        return directory;
     }
 }
