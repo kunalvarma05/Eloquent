@@ -12,27 +12,27 @@ import java.util.Queue;
 
 public class BatchTransfer {
 
-	protected Queue<BatchTransferFile> paths;
+    protected Queue<BatchTransferFile> paths;
 
-	protected List<File> files;
+    protected List<File> files;
 
-	protected AdapterInterface toAdapter;
+    protected AdapterInterface toAdapter;
 
-	protected AdapterInterface fromAdapter;
+    protected AdapterInterface fromAdapter;
 
-	public BatchTransfer() {
+    public BatchTransfer() {
 
-		this.paths = new LinkedList<BatchTransferFile>();
-		this.files = new ArrayList<>();
-	}
+        this.paths = new LinkedList<BatchTransferFile>();
+        this.files = new ArrayList<>();
+    }
 
-	public BatchTransfer(List<String> filePaths) {
-		super();
+    public BatchTransfer(List<String> filePaths) {
+        super();
 
-		for (String path : filePaths) {
-			this.add(path);
-		}
-	}
+        for (String path : filePaths) {
+            this.add(path);
+        }
+    }
 
     /**
      * Add path of the file to transfer
@@ -41,9 +41,9 @@ public class BatchTransfer {
      *
      * @return {@link BatchTransfer}
      */
-	public BatchTransfer add(String path) {
-		return this.add(path, path);
-	}
+    public BatchTransfer add(String path) {
+        return this.add(path, path);
+    }
 
     /**
      * Add path of the file and the new path
@@ -54,11 +54,11 @@ public class BatchTransfer {
      *
      * @return {@link BatchTransfer}
      */
-	public BatchTransfer add(String path, String newPath) {
-		this.paths.add(new BatchTransferFile(path, newPath));
+    public BatchTransfer add(String path, String newPath) {
+        this.paths.add(new BatchTransferFile(path, newPath));
 
-		return this;
-	}
+        return this;
+    }
 
     /**
      * Set the adapter to transfer the files to
@@ -67,11 +67,11 @@ public class BatchTransfer {
      *
      * @return {@link BatchTransfer}
      */
-	public BatchTransfer to(AdapterInterface toAdapter) {
-		this.toAdapter = toAdapter;
+    public BatchTransfer to(AdapterInterface toAdapter) {
+        this.toAdapter = toAdapter;
 
-		return this;
-	}
+        return this;
+    }
 
     /**
      * Set the adapter to transfer the files from
@@ -80,11 +80,11 @@ public class BatchTransfer {
      *
      * @return {@link BatchTransfer}
      */
-	public BatchTransfer from(AdapterInterface fromAdapter) {
-		this.fromAdapter = fromAdapter;
+    public BatchTransfer from(AdapterInterface fromAdapter) {
+        this.fromAdapter = fromAdapter;
 
-		return this;
-	}
+        return this;
+    }
 
     /**
      * Execute the batch Request and get the transferred files
@@ -93,25 +93,25 @@ public class BatchTransfer {
      *
      * @throws EloquentException Eloquent Exception
      */
-	public List<File> getFiles() throws EloquentException {
+    public List<File> getFiles() throws EloquentException {
 
-		while (!this.paths.isEmpty()) {
+        while (!this.paths.isEmpty()) {
 
-			// Retrieve first path | HEAD
-			BatchTransferFile transferFile = this.paths.poll();
+            // Retrieve first path | HEAD
+            BatchTransferFile transferFile = this.paths.poll();
 
-			Transfer transfer = new Transfer(transferFile.getPath());
-			transfer.from(this.fromAdapter).to(this.toAdapter).at(transferFile.getNewPath());
+            Transfer transfer = new Transfer(transferFile.getPath());
+            transfer.from(this.fromAdapter).to(this.toAdapter).at(transferFile.getNewPath());
 
-			try {
-				File file = transfer.getFile();
-				this.files.add(file);
-			} catch (Exception e) {
-				throw new EloquentException(e.getMessage());
-			}
-		}
+            try {
+                File file = transfer.getFile();
+                this.files.add(file);
+            } catch (Exception e) {
+                throw new EloquentException(e.getMessage());
+            }
+        }
 
-		return this.files;
-	}
+        return this.files;
+    }
 
 }
