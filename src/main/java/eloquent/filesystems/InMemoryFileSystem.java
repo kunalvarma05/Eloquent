@@ -43,15 +43,14 @@ public class InMemoryFileSystem {
 	}
 
 	/**
-	 * Write a new file.
+	 * Write a new file
 	 *
 	 * @param path File Path
 	 * @param contents File contents
 	 *
 	 * @return {@link FSFile}
 	 *
-	 * @throws InMemoryFileSystemException
-	 *             FileSystem Exception
+	 * @throws InMemoryFileSystemException FileSystem Exception
 	 */
 	public FSFile write(String path, String contents) throws InMemoryFileSystemException {
         if (!this.getFiles().containsKey(path)) {
@@ -66,15 +65,14 @@ public class InMemoryFileSystem {
 	}
 
 	/**
-	 * Update a file.
+	 * Update a file
 	 *
 	 * @param path File Path
 	 * @param contents File contents
 	 *
 	 * @return {@link FSFile}
 	 *
-	 * @throws InMemoryFileSystemException
-	 *             FileSystem Exception
+	 * @throws InMemoryFileSystemException FileSystem Exception
 	 */
 	public FSFile update(String path, String contents) throws InMemoryFileSystemException {
         if (this.getFiles().containsKey(path)) {
@@ -94,13 +92,11 @@ public class InMemoryFileSystem {
 	/**
 	 * Check if a File exists or not
 	 *
-	 * @param path
-	 *            File Path
+	 * @param path File Path
 	 *
 	 * @return boolean
 	 *
-	 * @throws InMemoryFileSystemException
-	 *             FileSystem Exception
+	 * @throws InMemoryFileSystemException FileSystem Exception
 	 */
 	public boolean has(String path) throws InMemoryFileSystemException {
         return this.getFiles().containsKey(path);
@@ -109,15 +105,12 @@ public class InMemoryFileSystem {
 	/**
 	 * Rename a file
 	 *
-	 * @param path
-	 *            File Path
-	 * @param newPath
-	 *            New path
+	 * @param path File Path
+	 * @param newPath New path
 	 *
 	 * @return boolean
 	 *
-	 * @throws InMemoryFileSystemException
-	 *             FileSystem Exception
+	 * @throws InMemoryFileSystemException FileSystem Exception
 	 */
 	public boolean rename(String path, String newPath) throws InMemoryFileSystemException {
         if (this.has(path)) {
@@ -135,15 +128,12 @@ public class InMemoryFileSystem {
 	/**
 	 * Copy a file
 	 *
-	 * @param path
-	 *            File Path
-	 * @param newPath
-	 *            New path
+	 * @param path File path
+	 * @param newPath New path
 	 *
 	 * @return {@link FSFile}
 	 *
-	 * @throws InMemoryFileSystemException
-	 *             FileSystem Exception
+	 * @throws InMemoryFileSystemException FileSystem Exception
 	 */
 	public FSFile copy(String path, String newPath) throws InMemoryFileSystemException {
         if (!this.has(path)) {
@@ -164,13 +154,11 @@ public class InMemoryFileSystem {
 	/**
 	 * Delete a file
 	 *
-	 * @param path
-	 *            File Path
+	 * @param path File path
 	 *
 	 * @return boolean
 	 *
-	 * @throws InMemoryFileSystemException
-	 *             FileSystem Exception
+	 * @throws InMemoryFileSystemException FileSystem Exception
 	 */
 	public boolean delete(String path) throws InMemoryFileSystemException {
         if (!this.has(path)) {
@@ -188,13 +176,11 @@ public class InMemoryFileSystem {
 	/**
 	 * Delete a directory
 	 *
-	 * @param path
-	 *            File Path
+	 * @param path File path
 	 *
 	 * @return boolean
 	 *
-	 * @throws InMemoryFileSystemException
-	 *             FileSystem Exception
+	 * @throws InMemoryFileSystemException FileSystem Exception
 	 */
 	public boolean deleteDir(String path) throws InMemoryFileSystemException {
         if (!this.has(path)) {
@@ -212,13 +198,11 @@ public class InMemoryFileSystem {
 	/**
 	 * Create a directory
 	 *
-	 * @param path
-	 *            File Path
+	 * @param path File path
 	 *
 	 * @return {@link FSDirectory}
 	 *
-	 * @throws InMemoryFileSystemException
-	 *             FileSystem Exception
+	 * @throws InMemoryFileSystemException FileSystem Exception
 	 */
 	public FSDirectory createDir(String path) throws InMemoryFileSystemException {
         if (this.has(path)) {
@@ -236,13 +220,11 @@ public class InMemoryFileSystem {
 	/**
 	 * Read / View a directory
 	 *
-	 * @param path
-	 *            File Path
+	 * @param path File Path
 	 *
 	 * @return {@link FSDirectory}
 	 *
-	 * @throws InMemoryFileSystemException
-	 *             FileSystem Exception
+	 * @throws InMemoryFileSystemException FileSystem Exception
 	 */
 	public FSDirectory readDir(String path) throws InMemoryFileSystemException {
         if (!this.has(path)) {
@@ -256,6 +238,13 @@ public class InMemoryFileSystem {
         }
 	}
 
+	/**
+     * Extract file name from path
+	 *
+	 * @param path File path
+     *
+	 * @return String
+	 */
 	protected static String extractName(String path) {
         int index = path.lastIndexOf("/");
 
