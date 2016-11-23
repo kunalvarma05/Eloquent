@@ -5,8 +5,8 @@ package eloquent.exceptions;
  */
 public class FileAlreadyExistsException extends EloquentException {
 
-	public FileAlreadyExistsException(String filePath) {
-		super("File " + filePath + " already exists.");
-	}
+    public FileAlreadyExistsException(String filePath) {
+        super("File " + filePath + " already exists.");
+    }
 
 }

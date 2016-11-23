@@ -7,51 +7,51 @@ import java.util.Date;
  */
 public class FSObject {
 
-	protected String name;
+    protected String name;
 
-	protected String path;
+    protected String path;
 
-	protected String size;
+    protected String size;
 
-	protected Date timestamp;
+    protected Date timestamp;
 
-	public String getName() {
-		return this.name;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public FSObject setName(String name) {
-		this.name = name;
+    public FSObject setName(String name) {
+        this.name = name;
 
-		return this;
-	}
+        return this;
+    }
 
-	public String getPath() {
-		return path;
-	}
+    public String getPath() {
+        return path;
+    }
 
-	public FSObject setPath(String path) {
-		this.path = path;
+    public FSObject setPath(String path) {
+        this.path = path;
 
-		return this;
-	}
+        return this;
+    }
 
-	public String getSize() {
-		return size;
-	}
+    public String getSize() {
+        return size;
+    }
 
-	public FSObject setSize(String size) {
-		this.size = size;
+    public FSObject setSize(String size) {
+        this.size = size;
 
-		return this;
-	}
+        return this;
+    }
 
-	public Date getTimestamp() {
-		return timestamp;
-	}
+    public Date getTimestamp() {
+        return timestamp;
+    }
 
-	public FSObject setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
+    public FSObject setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
 
-		return this;
-	}
+        return this;
+    }
 }

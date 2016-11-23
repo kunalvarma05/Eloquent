@@ -1,0 +1,6 @@
+root = true
+
+[src/**.java]
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
