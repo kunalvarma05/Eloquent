@@ -4,4 +4,4 @@ Eloquent
 
 Eloquent aims to provide an Unified API for working with files across multiple file systems.
 
-Inspired by [thephpleague/flysystem](https://github.com/thephpleague/flysystem)
+Inspired by [thephpleague/flysystem](https://github.com/thephpleague/flysystem).
